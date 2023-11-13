@@ -2,60 +2,78 @@ package christmas.domain;
 
 import christmas.valiator.OrderValidator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Order {
-
-    String SPERATOR = "-";
+    Map<String, Integer> orderMenu;
+    String SEPERATOR = "-";
     String ERROR_UNVALIDATED_ORDER ="[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
-    public Map<String, Integer> orderMenu(String MenuBeforeSplit){
 
-        Map<String, Integer> customerOrder = new HashMap<>();
+    List<String> orderMenuName = new ArrayList<>();
+    List<Integer> orderMenuCount = new ArrayList<>();
+    public Map<String, Integer> orderMenu(String rawInputOrder){
+        String[] splitedOrderMenu = splitByComma(rawInputOrder);
 
-        // (1) 쉼표로 각 주문 분리
-        String[] splitedOrderMenu = MenuBeforeSplit.split(",");
-
-
-        for(String order : splitedOrderMenu){
-
-            // (2) 구분자 "-"가 존재하는지 확인
-            isInSeperator(order);
-            String[] tempOrder = order.split(SPERATOR);
-
-            // (3) 구분자를 기준으로 메뉴 이름 - 메뉴 개수 구성되어 있는지 확인
-            consistMenuAndOrderCount(tempOrder);
-
-            // (4) 구분자 뒤 요소가 숫자인지 확인
-            int tempCount = Integer.parseInt(tempOrder[1]);
-
-            // (5) 손님의 주문 list를 담은 customerMenu에 저장
-            customerOrder.put(tempOrder[0],tempCount);
+        for(String order: splitedOrderMenu){
+            checkOrderFormat(order);
         }
 
-        // (6) 주문이 존재하는 메뉴인지/ 주문 개수는 20개 안넘는지 // 음료만 주문하지 않았는지 확인
-        OrderValidator.validateMenu(customerOrder);
-        return customerOrder;
+        OrderValidator.validateMenuName(orderMenuName);
+        OrderValidator.validateMenuCount(orderMenuCount);
+
+        Map<String, Integer> OrderMap = makeOrderMap(splitedOrderMenu);
+        return OrderMap;
+    }
+
+
+    public String[] splitByComma(String rawInputOrder){
+        String blankRemovedOrder = rawInputOrder.replace(" ","");
+        return blankRemovedOrder.split(",");
+    }
+
+    public void checkOrderFormat(String order) {
+        String[] tempOrder = splitBySeperator(order);
+        isOrderconsistTwoParts(tempOrder);
+        isSecondElementInteger(tempOrder);
+
+        orderMenuName.add(tempOrder[0]);
+        int eachOrderMenuCount = Integer.parseInt(tempOrder[1]);
+        orderMenuCount.add(eachOrderMenuCount);
+    }
+
+    public String[] splitBySeperator(String order){
+        isInSeperator(order);
+        return order.split(SEPERATOR);
+    }
+
+    public void isSecondElementInteger(String[] tempOrder){
+        int temp = Integer.parseInt(tempOrder[1]);
     }
 
     public void isInSeperator(String order){
-        if(! order.contains(SPERATOR)){
+        if(! order.contains(SEPERATOR)){
             throw new IllegalArgumentException(ERROR_UNVALIDATED_ORDER);
         }
     }
 
-    public void consistMenuAndOrderCount(String[] tempOrder){
+    public void isOrderconsistTwoParts(String[] tempOrder){
         if(tempOrder.length != 2){
             throw new IllegalArgumentException(ERROR_UNVALIDATED_ORDER);
         }
     }
 
-    public void IsvalidatedMenuFormat(String MenuBeforeSplit){
-        int removedCommaLength = MenuBeforeSplit.replace(",","").length();
-        int removedSeparatorLength = MenuBeforeSplit.replace(SPERATOR,"").length();
+    public  Map<String, Integer> makeOrderMap(String[] splitedOrderMenu){
+        Map<String, Integer> OrderMap = new HashMap<>();
 
-        if(removedSeparatorLength != removedCommaLength + 1){
-            throw new IllegalArgumentException(ERROR_UNVALIDATED_ORDER);
+        for(String order: splitedOrderMenu){
+            String[] tempOrder = splitBySeperator(order);
+            int tempCount = Integer.parseInt(tempOrder[1]);
+            OrderMap.put(tempOrder[0], tempCount);
         }
+        return OrderMap;
     }
+
 }

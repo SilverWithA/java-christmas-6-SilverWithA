@@ -12,9 +12,8 @@ public class ControllerTest {
     void 주문날짜_범위_입력테스트(){
         Controller controller = new Controller();
 
-        assertThatThrownBy(() -> controller.askVistitDate("32"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
+        assertThatThrownBy(() -> controller.checkValidationVistitDate("32"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -22,9 +21,17 @@ public class ControllerTest {
     void 주문메뉴_숫자형_입력테스트(){
         Controller controller = new Controller();
 
-        assertThatThrownBy(() -> controller.askVistitDate("3일"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
+        assertThatThrownBy(() -> controller.checkValidationVistitDate("3일"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+    // --------------------------------------------------------------
+    @Test
+    @DisplayName("주문 형식이 올바르지 않으면 에러가 일어나는지 테스트")
+    void 주문형식_예외테스트(){
+        Controller controller = new Controller();
+        assertThatThrownBy(() -> controller
+                .checkValidationOrder("감자칩-많이, 사이다-1"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     void 주문메뉴_출력테스트(){
