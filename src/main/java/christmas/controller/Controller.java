@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.Date;
 import christmas.utils.Calculator;
 import christmas.domain.Discount;
@@ -7,6 +8,7 @@ import christmas.domain.Order;
 import christmas.valiator.DateValiator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import org.mockito.internal.util.ConsoleMockitoLogger;
 
 import java.util.Map;
 
@@ -18,7 +20,9 @@ public class Controller {
     Order order = new Order();
 
     public void evenStart(){
-        askVistitDate();
+        String inputDate = InputView.requestVisitDate();
+        askVistitDate(inputDate);
+
         askOrderMenu();
         showOrderMenu();
         showTotalOrderAmountBeforeDiscount();
@@ -29,14 +33,11 @@ public class Controller {
         showPayAmount();
         showEventBadage();
     }
-    public void askVistitDate(){
+    public void askVistitDate(String inputDate){
         while(true){
             try{
-                //숫자형 확인 -> 아닐시 에러
-                int vistitDate = Integer.parseInt(InputView.requestVisitDate());
-                //범위수 확인
+                int vistitDate = Integer.parseInt(inputDate);
                 DateValiator.isInRange(vistitDate);
-                //맞으면 날짜 정보 저장
                 date.setDate(vistitDate);
                 break;
             }catch(IllegalArgumentException e){

@@ -1,16 +1,30 @@
 package christmas.controller;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class ControllerTest {
 
     @Test
-    void 방문날짜_입력테스트(){
+    @DisplayName("주문 날짜가 1 ~ 31 사이가 아닐때 에러 테스트")
+    void 주문날짜_범위_입력테스트(){
+        Controller controller = new Controller();
 
+        assertThatThrownBy(() -> controller.askVistitDate("32"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
     }
 
-    void 주문메뉴_입력테스트(){
+    @Test
+    @DisplayName("주문 날짜가 숫자형이 아닐때 에러 테스트")
+    void 주문메뉴_숫자형_입력테스트(){
+        Controller controller = new Controller();
 
+        assertThatThrownBy(() -> controller.askVistitDate("3일"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
     }
 
     void 주문메뉴_출력테스트(){
