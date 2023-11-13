@@ -1,5 +1,11 @@
 package christmas.constants;
 
+import java.util.Collections;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public enum Menu {
     양송이수프("양송이수프",6000,"에피타이저"),
     타파스("양송이수프",6000,"에피타이저"),
@@ -17,17 +23,18 @@ public enum Menu {
     레드와인("양송이수프",60000,"음료"),
     샴페인("양송이수프",25000,"음료");
 
-    private final String name;
+    private final String menuName;
     private final int price;
     private final String type;
-    private Menu(String name, int price, String type){
-        this.name = name;
+    private Menu(String menuName, int price, String type){
+        this.menuName = menuName;
         this.price = price;
         this.type = type;
     }
 
+
     public String getName(){
-        return name;
+        return menuName;
     }
 
     public String getType(){
@@ -36,5 +43,21 @@ public enum Menu {
 
     public int getPrice() {
         return price;
+    }
+
+    private static final Map<String, Integer> MEUE_PRICE_MAP =
+            Collections.unmodifiableMap(Stream.of(values())
+                    .collect(Collectors.toMap(Menu::getName,Menu::getPrice)));
+
+    private static final Map<String, String> MEUE_TYPE_MAP =
+            Collections.unmodifiableMap(Stream.of(values())
+                    .collect(Collectors.toMap(Menu::getName,Menu::getType)));
+
+    public static Integer priceOf(String menuName){
+        return MEUE_PRICE_MAP.get(menuName);
+    }
+
+    public static String typeOf(String menuName){
+        return MEUE_TYPE_MAP.get(menuName);
     }
 }

@@ -1,21 +1,21 @@
 package christmas.controller;
 
-import christmas.domain.CustomerMenu;
+import christmas.domain.Date;
 import christmas.utils.Calculator;
 import christmas.domain.Discount;
+import christmas.domain.Order;
 import christmas.valiator.DateValiator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
-import java.awt.*;
 import java.util.Map;
 
 public class Controller {
     Map<String, Integer> orderMenu;
-    int totalAmountBeforeDiscount;
-    boolean gift;
-    Discount discount = new Discount(); //할인 정보 관리 클래스
-    CustomerMenu customerMenu = new CustomerMenu();// Menu menu = new Menu();
+
+    Date date = new Date();
+    Discount discount = new Discount();
+    Order order = new Order();
 
     public void evenStart(){
         askVistitDate();
@@ -23,7 +23,8 @@ public class Controller {
         showOrderMenu();
         showTotalOrderAmountBeforeDiscount();
         showGiftMenu();
-        showDiscountDetails();
+
+        discountDetails();
         showTotalDiscountAmount();
         showPayAmount();
         showEventBadage();
@@ -31,26 +32,28 @@ public class Controller {
     public void askVistitDate(){
         while(true){
             try{
-                //숫자형 확인
+                //숫자형 확인 -> 아닐시 에러
                 int vistitDate = Integer.parseInt(InputView.requestVisitDate());
                 //범위수 확인
                 DateValiator.isInRange(vistitDate);
                 //맞으면 날짜 정보 저장
-                discount.setDate(vistitDate);
+                date.setDate(vistitDate);
                 break;
             }catch(IllegalArgumentException e){
-                OutputView.ERROR_MESSAGE(ERROR_MESSAGE_DATE);
+                OutputView.showErrorMessageDate();
             }
         }
     }
+
     public void askOrderMenu(){
         while(true) {
             try {
-                String MenuBeforeSplit = InputView.requestOrdringMenu();
-                this.orderMenu = customerMenu.orderMenu(MenuBeforeSplit);
+                String MenuBeforeSplit = InputView.requestVisitDate();
+                this.orderMenu = order.orderMenu(MenuBeforeSplit);
+                discount.setOrderMenu(this.orderMenu);
                 break;
             } catch (IllegalArgumentException e) {
-                OutputView.ERROR_MESSAGE(ERROR_MESSAGE_MENU);
+                OutputView.showErrorMessageMenu();
             }
         }
     }
@@ -59,19 +62,32 @@ public class Controller {
     }
 
     public void showTotalOrderAmountBeforeDiscount(){
-        Calculator calculator = new Calculator();
-        this.totalAmountBeforeDiscount = calculator.calculateTotalAmountBeforeDiscount(orderMenu);
-        String wonFormatTotalAmount = calculator.parseWonFormat(totalAmountBeforeDiscount);
-        OutputView.showTotalAmountBeforeDiscount(wonFormatTotalAmount);
-    }
-    public void showGiftMenu(){
-        if(totalAmountBeforeDiscount >= PRICE_TO_GIVE_GIFT){
-            OutputView.giveGift();
-            this.gift = true;
-        }else if(totalAmountBeforeDiscount < PRICE_TO_GIVE_GIFT){
-            OutputView.giveGiftNull();
-            this.gift = false;
-        }
+        int totalAmountBeforeDiscount = Calculator.calculateTotalAmountBeforeDiscount(orderMenu);
+        discount.setTotalAmountBeforeDiscount(totalAmountBeforeDiscount);
+        OutputView.TotalOrderAmountBeforeDiscount(totalAmountBeforeDiscount);
     }
 
+    public void showGiftMenu(){
+        discount.canReceiveGift();
+    }
+
+
+    public void discountDetails(){
+        OutputView.showDiscountDetails();
+        discount.saveDiscountAmountAbountAllEvent(date);
+    }
+
+    public void showTotalDiscountAmount() {
+        int totalDiscountAmount = discount.totalDiscountAmount();
+        OutputView.showTotalDiscountAmount(totalDiscountAmount);
+    }
+    // ------------------------------------------------------------------------
+    public void showPayAmount(){
+        int payAmount = discount.payAmount();
+        OutputView.showPayAmount(payAmount);
+    }
+
+    public void showEventBadage(){
+        discount.badge();
+    }
 }

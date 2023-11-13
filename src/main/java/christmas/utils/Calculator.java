@@ -2,23 +2,78 @@ package christmas.utils;
 
 import christmas.constants.Menu;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class Calculator {
 
-    public int calculateTotalAmountBeforeDiscount(Map<String, Integer> orderMenu){
+
+
+    //할인 전 총 구매금액
+    public static int calculateTotalAmountBeforeDiscount(Map<String, Integer> orderMenu){
         int totalAmount = 0;
-        for(String menuName : orderMenu.keySet()){
-            totalAmount += Menu.menuName.getPrice() * orderMenu.get(menuName);
+        for(String orderName : orderMenu.keySet()){
+            //메뉴 Enum에서 메뉴에 상응하는 가격 찾아오기
+            totalAmount += Menu.priceOf(orderName);
+            }
+        return totalAmount;
         }
 
-        return totalAmount;
+
+
+    // 크리스마스 할인 계산
+     public static int calculateChristmasDistcount(int date) {
+        int christmasDistcountAmount = 0;
+        if (date < 26) {
+            christmasDistcountAmount +=  1000 + (100 * (date - 1));
+        }
+        return christmasDistcountAmount;
     }
 
-    public String parseWonFormat(int totalAmount){
-        String temp = String.valueOf(totalAmount);
-
-        // ,와 "원" 추가하기
-        return temp;
+    // 평일 할인 계산
+    public static int calculateDayDiscount(Map<String, Integer> orderMenu){
+        int discountAmount = 0;
+        for(String menu : orderMenu.keySet()){
+            if(isDesert(menu)){
+                discountAmount += 2023;
+            }
+        }
+        return discountAmount;
     }
+
+    private static boolean isDesert(String menu){
+        boolean answer = false;
+        if(Menu.typeOf(menu) == "디저트") {
+            answer = true;
+        }
+        return answer;
+    }
+
+    public static int calculateWeekendDiscount(Map<String, Integer> orderMenu){
+        int discountAmount = 0;
+        for(String menu : orderMenu.keySet()){
+            if(isMain(menu)){
+                discountAmount += 2023;
+            }
+        }
+        return discountAmount;
+
+    }
+
+    private static boolean isMain(String menu){
+        boolean answer = false;
+        if(Menu.typeOf(menu) == "메인") {
+            answer = true;
+        }
+        return answer;
+    }
+
+    public static int calculateSpecialDiscount(boolean specialDay){
+        int discountAmount = 0;
+        if(specialDay){
+            discountAmount += 1000;
+        }
+        return discountAmount;
+    }
+
 }
