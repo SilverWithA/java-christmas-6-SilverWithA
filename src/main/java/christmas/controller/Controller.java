@@ -5,7 +5,6 @@ import christmas.domain.Date;
 import christmas.utils.Calculator;
 import christmas.domain.Discount;
 import christmas.domain.Order;
-import christmas.valiator.DateValiator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -20,7 +19,7 @@ public class Controller {
     Discount discount = new Discount();
 
     public void evenStart() {
-//        askVistitDate();
+        askVistitDate();
         askOrderMenu();
         // ------------------------------------------------------------------------
 //        showOrderMenu();
@@ -56,7 +55,7 @@ public class Controller {
         public void askOrderMenu () {
             while (true) {
                 try {
-                    String MenuBeforeSplit = InputView.requestOrderMenu(orderDate);
+                    String MenuBeforeSplit = InputView.requestOrderMenu();
                     checkValidationOrder(MenuBeforeSplit);
                     break;
                 } catch (IllegalArgumentException e) {

@@ -12,9 +12,10 @@ public class Order {
     String SEPERATOR = "-";
     String ERROR_UNVALIDATED_ORDER ="[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
 
-    List<String> orderMenuName = new ArrayList<>();
-    List<Integer> orderMenuCount = new ArrayList<>();
+    List<String> orderMenuName;
+    List<Integer> orderMenuCount;
     public Map<String, Integer> orderMenu(String rawInputOrder){
+        initOrderMenus();
         String[] splitedOrderMenu = splitByComma(rawInputOrder);
 
         for(String order: splitedOrderMenu){
@@ -26,6 +27,10 @@ public class Order {
 
         Map<String, Integer> OrderMap = makeOrderMap(splitedOrderMenu);
         return OrderMap;
+    }
+    public void initOrderMenus(){
+        this.orderMenuName = new ArrayList<>();
+        this.orderMenuCount = new ArrayList<>();
     }
 
 
@@ -50,7 +55,11 @@ public class Order {
     }
 
     public void isSecondElementInteger(String[] tempOrder){
-        int temp = Integer.parseInt(tempOrder[1]);
+        try {
+            Integer.parseInt(tempOrder[1]);
+        } catch (NumberFormatException e) {
+            throw e;
+        }
     }
 
     public void isInSeperator(String order){
