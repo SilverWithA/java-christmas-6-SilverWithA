@@ -10,6 +10,7 @@ import java.util.Map;
 public class Event {
 
     boolean receivedGift = false;
+    boolean applicableOrderAmount = false;
     int PRICE_TO_GIVE_GIFT = DecemberEvent.GIFT_MENU_NAME.getPrice();
     String GIFT_MENU_NAME = DecemberEvent.GIFT_MENU_NAME.getName();
     String EVENT_BADGE_FIRST = DecemberEvent.EVENT_BADGE_FIRST.getName();
@@ -21,7 +22,9 @@ public class Event {
     int EVENT_BADGE_THIRD_PRICE = DecemberEvent.EVENT_BADGE_THIRD.getPrice();
     int EVENT_BADGE_NOTHING_PRICE = DecemberEvent.EVENT_BADGE_NOTHING.getPrice();
 
-
+    public boolean getApplicableOrderAmount(){
+        return this.applicableOrderAmount;
+    }
     // 증정품
     public boolean canReceiveGift(Discount discount) {
         if (discount.getTotalAmountBeforeDiscount() >= PRICE_TO_GIVE_GIFT) {
@@ -56,10 +59,10 @@ public class Event {
     }
 
     public void checkThereIsEvent(Discount discount) {
-        if (discount.getTotalDiscountAmount() == 0) {
-            OutputView.noEvnetHistory();
-        } else if (discount.getTotalDiscountAmount() > 0) {
-            discount.showGiftPrice();
+        if (discount.getTotalDiscountAmount() > 0) {
+            this.applicableOrderAmount = true;
+        } else if (discount.getTotalDiscountAmount() == 0) {
+            this.applicableOrderAmount = false;
         }
     }
 

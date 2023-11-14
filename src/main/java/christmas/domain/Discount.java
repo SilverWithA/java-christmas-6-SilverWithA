@@ -17,6 +17,7 @@ public class Discount {
 
 
 
+
     // 할인 전 총 구매금액
     public void setTotalAmountBeforeDiscount(int totalAmountBeforeDiscount) {
         this.totalAmountBeforeDiscount = totalAmountBeforeDiscount;
@@ -36,7 +37,7 @@ public class Discount {
         int christmasDistcountAmount = date.canChristmasDiscount();
         if (christmasDistcountAmount > 0) {
             this.christmasDistcountAmount = christmasDistcountAmount;
-            OutputView.showChristmasDiscount(christmasDistcountAmount);
+            OutputView.viewChristmasDiscount(christmasDistcountAmount);
         }
     }
 
@@ -48,7 +49,7 @@ public class Discount {
     public void setWeekendDistcountAmount(int discountAmount) {
         if (discountAmount > 0) {
             this.weekendDistcountAmount = discountAmount;
-            OutputView.showWeekendDistcount(discountAmount);
+            OutputView.viewWeekendDistcount(discountAmount);
         }
     }
 
@@ -61,7 +62,7 @@ public class Discount {
     public void setDayDistcountAmount(int discountAmount) {
                 if (discountAmount > 0) {
             this.dayDistcountAmount = discountAmount;
-            OutputView.showDayDistcount(discountAmount);
+            OutputView.viewDayDistcount(discountAmount);
         }
     }
 
@@ -71,7 +72,7 @@ public class Discount {
         int discountAmount = date.canSpecialDiscount();
         if (discountAmount > 0) {
             this.specialDistcountAmount = discountAmount;
-            OutputView.showSpecialDistcount(discountAmount);
+            OutputView.viewSpecialDistcount(discountAmount);
         }
     }
 

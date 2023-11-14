@@ -86,25 +86,32 @@ public class Controller {
 
 
     public void showDiscountDetails() {
-        OutputView.showDiscountDetails();
-        event.saveDiscountAmountAbountAllEvent(discount, date, order);
+        OutputView.viewDiscountDetails();
+        boolean eventApplicability = event.getApplicableOrderAmount();
+        if(eventApplicability){
+            event.saveDiscountAmountAbountAllEvent(discount, date, order);
+        }else if(!eventApplicability){
+            OutputView.noEvnetHistory();
+        }
+
     }
 
 
 
     public void showTotalDiscountAmount() {
         int totalDiscountAmount = discount.sumTotalDiscountAmount();
+        OutputView.viewTotalDiscountAmountTitle();
 
         if(totalDiscountAmount > 0){
-            OutputView.showTotalDiscountAmount(totalDiscountAmount);
+            OutputView.viewTotalDiscountAmount(totalDiscountAmount);
         }else if(totalDiscountAmount == 0){
-            OutputView.showTotalDiscountAmountNull();
+            OutputView.noEvnetHistory();
         }
     }
 
     public void showPayAmount() {
         int payAmount = discount.calculatePayAmount();
-        OutputView.showPayAmount(payAmount);
+        OutputView.viewPayAmount(payAmount);
     }
 
     public void showEventBadage() {

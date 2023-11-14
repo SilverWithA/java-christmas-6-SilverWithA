@@ -48,41 +48,39 @@ public class OutputView {
         System.out.println("없음");
     }
 
-    public static void showDiscountDetails() {
+    public static void viewDiscountDetails() {
         System.out.println();
         System.out.println("<혜택 내역>");
     }
 
-    public static void showChristmasDiscount(int christmasDistcountAmount) {
+    public static void viewChristmasDiscount(int christmasDistcountAmount) {
         System.out.println(String.format("크리스마스 디데이 할인: -%,d원", christmasDistcountAmount, 3));
     }
 
-    public static void showWeekendDistcount(int weekendDistcountAmount) {
+    public static void viewWeekendDistcount(int weekendDistcountAmount) {
         System.out.println(String.format("주말 할인: -%,d원", weekendDistcountAmount, 3));
     }
 
-    public static void showDayDistcount(int dayDistcountAmount) {
+    public static void viewDayDistcount(int dayDistcountAmount) {
         System.out.println(String.format("평일 할인: -%,d원", dayDistcountAmount, 3));
     }
 
-    public static void showSpecialDistcount(int specialDistcountAmount) {
+    public static void viewSpecialDistcount(int specialDistcountAmount) {
         System.out.println(String.format("특별 할인: -%,d원", specialDistcountAmount, 3));
     }
 
-    public static void showTotalDiscountAmount(int totalDiscountAmount) {
+    public static void viewTotalDiscountAmountTitle() {
         System.out.println();
         System.out.println("<총혜택 금액>");
+    }
+
+    public static void viewTotalDiscountAmount(int totalDiscountAmount) {
         System.out.println(String.format("-%,d원", totalDiscountAmount, 3));
     }
 
-    public static void showTotalDiscountAmountNull() {
-        System.out.println();
-        System.out.println("<총혜택 금액>");
-        System.out.println("없음");
-    }
 
 
-    public static void showPayAmount(int payAmount) {
+    public static void viewPayAmount(int payAmount) {
         System.out.println();
         System.out.println("<할인 후 예상 결제 금액>");
         System.out.println(String.format("%,d원", payAmount, 3));
