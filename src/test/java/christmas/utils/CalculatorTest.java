@@ -104,4 +104,22 @@ public class CalculatorTest {
 
         assertThat(discountAmount).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("스페셜데이 해당시 할인 금액 테스트")
+    void 스페셜_할인금액_계산테스트_해당있음(){
+        boolean specialDay = true;
+        int discountAmount = Calculator.calculateSpecialDiscount(specialDay);
+
+        assertThat(discountAmount).isEqualTo(1000);
+    }
+
+    @Test
+    @DisplayName("스페셜데이 해당되지 않을시ㅐ 할인 금액 테스트")
+    void 스페셜_할인금액_계산테스트_해당없음(){
+        boolean specialDay = false;
+        int discountAmount = Calculator.calculateSpecialDiscount(specialDay);
+
+        assertThat(discountAmount).isEqualTo(0);
+    }
 }

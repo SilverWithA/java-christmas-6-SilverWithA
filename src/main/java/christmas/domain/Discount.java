@@ -7,11 +7,7 @@ import christmas.view.OutputView;
 import java.util.Map;
 
 public class Discount {
-    Map<String, Integer> orderMenu;
     int totalAmountBeforeDiscount;
-    int PRICE_TO_GIVE_GIFT = 120000;
-    String GIFT_MENU_NAME = "샴페인";
-    boolean receivedGift = false;
     int giftPrice = 0;
     int christmasDistcountAmount = 0;
     int dayDistcountAmount = 0;
@@ -19,9 +15,6 @@ public class Discount {
     int specialDistcountAmount = 0;
     int totalDiscountAmount = 0;
 
-    public void setOrderMenu(Map<String, Integer> orderMenu) {
-        this.orderMenu = orderMenu;
-    }
 
 
     // 할인 전 총 구매금액
@@ -33,21 +26,17 @@ public class Discount {
         return this.totalAmountBeforeDiscount;
     }
 
-    // 증정품
-    public boolean canReceiveGift() {
-        if (totalAmountBeforeDiscount >= PRICE_TO_GIVE_GIFT) {
-            this.receivedGift = true;
-            this.giftPrice = Menu.priceOf(GIFT_MENU_NAME);
-            return true;
-        }
-        return false;
+    public void setGiftPrice(int giftPrice){
+        this.giftPrice = giftPrice;
     }
 
-    public void saveDiscountAmountAbountAllEvent(Date date) {
+
+    public void saveDiscountAmountAbountAllEvent(Date date, Order order) {
 
         setChristmasDistcountAmount(date);
 
         boolean weekend = date.getWeekend();
+        Map<String, Integer> orderMenu = order.getOrderMenu();
 
         if (weekend) {
             int discountAmount = Calculator.calculateWeekendDiscount(orderMenu);
@@ -82,6 +71,10 @@ public class Discount {
         }
     }
 
+    public int getWeekendDistcountAmount(){
+        return this.weekendDistcountAmount;
+    }
+
 
     // 평일 할인 설정
     public void setDayDistcountAmount(int discountAmount) {
@@ -108,25 +101,18 @@ public class Discount {
     }
 
     public int sumTotalDiscountAmount() {
-        this.totalDiscountAmount = this.christmasDistcountAmount
-                + this.dayDistcountAmount
-                + this.weekendDistcountAmount
-                + this.specialDistcountAmount
-                + this.giftPrice;
-        return this.totalDiscountAmount;
+        this.totalDiscountAmount = christmasDistcountAmount
+                + dayDistcountAmount + weekendDistcountAmount
+                + specialDistcountAmount + giftPrice;
+        return totalDiscountAmount;
     }
 
-    public int payAmount() {
+    public int calculatePayAmount() {
         return totalAmountBeforeDiscount - totalDiscountAmount;
     }
 
-    public void badge() {
-        if (totalDiscountAmount > 2000) {
-            System.out.println("산타");
-        } else if (totalDiscountAmount > 10000) {
-            System.out.println("트리");
-        } else if (totalDiscountAmount > 5000) {
-            System.out.println("별");
-        }
+    public int getTotalDiscountAmount(){
+        return this.totalDiscountAmount;
     }
+
 }

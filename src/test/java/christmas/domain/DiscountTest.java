@@ -16,18 +16,6 @@ public class DiscountTest {
 
     }
 
-    @Test
-    void 증정품_제공_테스트_(){
-        Discount discount = new Discount();
-        discount.setTotalAmountBeforeDiscount(120000);
-        assertThat(discount.canReceiveGift()).isTrue();
-    }
-    @Test
-    void 증정품_미제공_테스트_(){
-        Discount discount = new Discount();
-        discount.setTotalAmountBeforeDiscount(10000);
-        assertThat(discount.canReceiveGift()).isFalse();
-    }
 
 
     @Test
@@ -38,6 +26,14 @@ public class DiscountTest {
         discount.setChristmasDistcountAmount(date);
 
         assertThat(discount.getChristmasDistcountAmount()).isEqualTo(3400);
+    }
+
+    @Test
+    void 주말_할인금액_설정테스트(){
+        Discount discount = new Discount();
+        discount.setWeekendDistcountAmount(2023);
+
+        assertThat(discount.getWeekendDistcountAmount()).isEqualTo(2023);
     }
 
 

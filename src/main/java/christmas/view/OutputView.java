@@ -49,9 +49,17 @@ public class OutputView {
     }
 
     public static void showTotalDiscountAmount(int totalDiscountAmount) {
+        System.out.println();
         System.out.println("<총혜택 금액>");
         System.out.println(String.format("-%,d원", totalDiscountAmount, 3));
     }
+
+    public static void showTotalDiscountAmountNull() {
+        System.out.println();
+        System.out.println("<총혜택 금액>");
+        System.out.println("없음");
+    }
+
 
     public static void showPayAmount(int payAmount) {
         System.out.println("<할인 후 예상 결제 금액>");
