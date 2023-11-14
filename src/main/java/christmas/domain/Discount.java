@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.constants.Menu;
 import christmas.utils.Calculator;
 import christmas.view.OutputView;
 
@@ -9,6 +10,7 @@ public class Discount {
     Map<String, Integer> orderMenu;
     int totalAmountBeforeDiscount;
     int PRICE_TO_GIVE_GIFT = 120000;
+    String GIFT_MENU_NAME = "샴페인";
     boolean receivedGift = false;
     int giftPrice = 0;
     int christmasDistcountAmount;
@@ -27,15 +29,21 @@ public class Discount {
         this.totalAmountBeforeDiscount = totalAmountBeforeDiscount;
     }
 
+    public int getTotalAmountBeforeDiscount(){
+        return this.totalAmountBeforeDiscount;
+    }
+
     // 증정품
-    public void canReceiveGift(){
+    public boolean canReceiveGift(){
         if(totalAmountBeforeDiscount >= PRICE_TO_GIVE_GIFT){
-            OutputView.giveGift();
             this.receivedGift = true;
-            this.giftPrice = 25000;
-        }else if(totalAmountBeforeDiscount < PRICE_TO_GIVE_GIFT){
-            OutputView.giveGiftNull();
+            this.giftPrice = Menu.priceOf(GIFT_MENU_NAME);
+            return true;
         }
+//        else if(totalAmountBeforeDiscount < PRICE_TO_GIVE_GIFT){
+//            return false;
+//        }
+        return false;
     }
 
     public void saveDiscountAmountAbountAllEvent(Date date){

@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.utils.Calculator;
 import christmas.valiator.OrderValidator;
 
 import java.util.ArrayList;
@@ -14,7 +15,15 @@ public class Order {
 
     List<String> orderMenuName;
     List<Integer> orderMenuCount;
-    public Map<String, Integer> orderMenu(String rawInputOrder){
+
+    public void setOrderMenu(Map<String, Integer> orderMenu){
+        this.orderMenu = orderMenu;
+    }
+
+    public Map<String, Integer> getOrderMenu(){
+        return this.orderMenu;
+    }
+    public void validateOrder(String rawInputOrder){
         initOrderMenus();
         String[] splitedOrderMenu = splitByComma(rawInputOrder);
 
@@ -26,7 +35,7 @@ public class Order {
         OrderValidator.validateMenuCount(orderMenuCount);
 
         Map<String, Integer> OrderMap = makeOrderMap(splitedOrderMenu);
-        return OrderMap;
+        this.orderMenu = OrderMap;
     }
     public void initOrderMenus(){
         this.orderMenuName = new ArrayList<>();
@@ -83,6 +92,10 @@ public class Order {
             OrderMap.put(tempOrder[0], tempCount);
         }
         return OrderMap;
+    }
+
+    public int totalAmountOrder(){
+        return Calculator.calculateTotalAmountBeforeDiscount(orderMenu);
     }
 
 }

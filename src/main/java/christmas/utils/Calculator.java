@@ -13,8 +13,8 @@ public class Calculator {
     public static int calculateTotalAmountBeforeDiscount(Map<String, Integer> orderMenu){
         int totalAmount = 0;
         for(String orderName : orderMenu.keySet()){
-            //메뉴 Enum에서 메뉴에 상응하는 가격 찾아오기
-            totalAmount += Menu.priceOf(orderName);
+            int orderCount = orderMenu.get(orderName);
+            totalAmount += (Menu.priceOf(orderName) * orderCount);
             }
         return totalAmount;
         }

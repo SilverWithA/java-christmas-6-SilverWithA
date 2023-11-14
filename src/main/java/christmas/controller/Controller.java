@@ -21,10 +21,9 @@ public class Controller {
     public void evenStart() {
         askVistitDate();
         askOrderMenu();
-        // ------------------------------------------------------------------------
-//        showOrderMenu();
-//        showTotalOrderAmountBeforeDiscount();
-//        showGiftMenu();
+        showOrderMenu();
+        showTotalOrderAmountBeforeDiscount();
+        showGiftMenu();
 //
 //        discountDetails();
 //        showTotalDiscountAmount();
@@ -56,7 +55,7 @@ public class Controller {
             while (true) {
                 try {
                     String MenuBeforeSplit = InputView.requestOrderMenu();
-                    checkValidationOrder(MenuBeforeSplit);
+                    checkOrder(MenuBeforeSplit);
                     break;
                 } catch (IllegalArgumentException e) {
                     OutputView.showErrorMessageMenu();
@@ -64,24 +63,29 @@ public class Controller {
             }
         }
 
-        public void checkValidationOrder(String MenuBeforeSplit){
-            this.orderMenu = order.orderMenu(MenuBeforeSplit);
-            discount.setOrderMenu(this.orderMenu);
+        public void checkOrder(String MenuBeforeSplit){
+            order.validateOrder(MenuBeforeSplit);
         }
 
-        // ------------
+
         public void showOrderMenu () {
-            OutputView.showOrderMenuHistory(orderMenu);
+            OutputView.showOrderMenuHistory(date.getDate(), order.getOrderMenu());
         }
 
         public void showTotalOrderAmountBeforeDiscount () {
-            int totalAmountBeforeDiscount = Calculator.calculateTotalAmountBeforeDiscount(orderMenu);
+            int totalAmountBeforeDiscount = order.totalAmountOrder();
             discount.setTotalAmountBeforeDiscount(totalAmountBeforeDiscount);
             OutputView.TotalOrderAmountBeforeDiscount(totalAmountBeforeDiscount);
         }
 
+        // ------------------------------------------------------------------------
         public void showGiftMenu () {
-            discount.canReceiveGift();
+            boolean gift = discount.canReceiveGift();
+            if (gift) {
+                OutputView.giveGift();
+            } else if (!gift) {
+                OutputView.giveGiftNull();
+            }
         }
 
 
