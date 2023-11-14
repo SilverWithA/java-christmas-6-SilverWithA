@@ -3,7 +3,6 @@ package christmas.controller;
 
 import christmas.domain.Date;
 import christmas.domain.Event;
-import christmas.utils.Calculator;
 import christmas.domain.Discount;
 import christmas.domain.Order;
 import christmas.view.InputView;
@@ -12,6 +11,7 @@ import christmas.view.OutputView;
 import java.util.Map;
 
 public class Controller {
+
     Date date = new Date();
     Order order = new Order();
     Discount discount = new Discount();
@@ -36,7 +36,7 @@ public class Controller {
                 checkValidationVistitDate(inputDate);
                 break;
             } catch (IllegalArgumentException e) {
-                OutputView.showErrorMessageDate();
+                OutputView.viewErrorMessageDate();
             }
         }
     }
@@ -55,7 +55,7 @@ public class Controller {
                 checkOrder(MenuBeforeSplit);
                 break;
             } catch (IllegalArgumentException e) {
-                OutputView.showErrorMessageMenu();
+                OutputView.viewErrorMessageMenu();
             }
         }
     }
@@ -66,27 +66,28 @@ public class Controller {
 
 
     public void showOrderMenu() {
-        OutputView.showOrderMenuHistory(date.getDate(), order.getOrderMenu());
+        OutputView.viewOrderMenuHistory(date.getDate(), order.getOrderMenu());
     }
 
     public void showTotalOrderAmountBeforeDiscount() {
         int totalAmountBeforeDiscount = order.totalAmountOrder();
         discount.setTotalAmountBeforeDiscount(totalAmountBeforeDiscount);
-        OutputView.TotalOrderAmountBeforeDiscount(totalAmountBeforeDiscount);
+        OutputView.viewTotalOrderAmountBeforeDiscount(totalAmountBeforeDiscount);
     }
     public void showGiftMenu() {
         boolean gift = event.canReceiveGift(discount);
+        OutputView.viewGiftHistory();
         if (gift) {
             OutputView.giveGift();
         } else if (!gift) {
-            OutputView.giveGiftNull();
+            OutputView.noEvnetHistory();
         }
     }
 
 
     public void showDiscountDetails() {
         OutputView.showDiscountDetails();
-        discount.saveDiscountAmountAbountAllEvent(date, order);
+        event.saveDiscountAmountAbountAllEvent(discount, date, order);
     }
 
 
@@ -100,13 +101,13 @@ public class Controller {
             OutputView.showTotalDiscountAmountNull();
         }
     }
-    // -----------------------------------------
+
     public void showPayAmount() {
         int payAmount = discount.calculatePayAmount();
         OutputView.showPayAmount(payAmount);
     }
 
     public void showEventBadage() {
-        event.badge(discount);
+        event.showEventBadge(discount);
     }
 }

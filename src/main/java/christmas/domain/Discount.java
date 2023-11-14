@@ -31,31 +31,12 @@ public class Discount {
     }
 
 
-    public void saveDiscountAmountAbountAllEvent(Date date, Order order) {
-
-        setChristmasDistcountAmount(date);
-
-        boolean weekend = date.getWeekend();
-        Map<String, Integer> orderMenu = order.getOrderMenu();
-
-        if (weekend) {
-            int discountAmount = Calculator.calculateWeekendDiscount(orderMenu);
-            setWeekendDistcountAmount(discountAmount);
-        } else if (!weekend) {
-            int discountAmount = Calculator.calculateDayDiscount(orderMenu);
-            setDayDistcountAmount(discountAmount);
-        }
-
-        setSpecialDistcountAmount(date);
-        showGiftPrice();
-    }
-
     //크리스마스 할인
     public void setChristmasDistcountAmount(Date date) {
         int christmasDistcountAmount = date.canChristmasDiscount();
         if (christmasDistcountAmount > 0) {
             this.christmasDistcountAmount = christmasDistcountAmount;
-            System.out.println(String.format("크리스마스 디데이 할인: -%,d원", christmasDistcountAmount, 3));
+            OutputView.showChristmasDiscount(christmasDistcountAmount);
         }
     }
 
@@ -67,7 +48,7 @@ public class Discount {
     public void setWeekendDistcountAmount(int discountAmount) {
         if (discountAmount > 0) {
             this.weekendDistcountAmount = discountAmount;
-            System.out.println(String.format("주말 할인: -%,d원", weekendDistcountAmount, 3));
+            OutputView.showWeekendDistcount(discountAmount);
         }
     }
 
@@ -80,7 +61,7 @@ public class Discount {
     public void setDayDistcountAmount(int discountAmount) {
                 if (discountAmount > 0) {
             this.dayDistcountAmount = discountAmount;
-            System.out.println(String.format("평일 할인: -%,d원", dayDistcountAmount, 3));
+            OutputView.showDayDistcount(discountAmount);
         }
     }
 
@@ -90,7 +71,7 @@ public class Discount {
         int discountAmount = date.canSpecialDiscount();
         if (discountAmount > 0) {
             this.specialDistcountAmount = discountAmount;
-            System.out.println(String.format("특별 할인: -%,d원", specialDistcountAmount, 3));
+            OutputView.showSpecialDistcount(discountAmount);
         }
     }
 
