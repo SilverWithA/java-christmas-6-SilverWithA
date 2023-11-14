@@ -36,7 +36,6 @@ public class Date {
     }
 
 
-
     public void isWeekend(int date) {
         for (int week = 0; week < 5; week++) {
             if (date == (FIRST_DAY + (7 * week)) | date == (SECOND_DAY + (7 * week))) {

@@ -24,8 +24,8 @@ public class Controller {
         showOrderMenu();
         showTotalOrderAmountBeforeDiscount();
         showGiftMenu();
-//
-//        discountDetails();
+
+        discountDetails();
 //        showTotalDiscountAmount();
 //        showPayAmount();
 //        showEventBadage();
@@ -78,7 +78,6 @@ public class Controller {
             OutputView.TotalOrderAmountBeforeDiscount(totalAmountBeforeDiscount);
         }
 
-        // ------------------------------------------------------------------------
         public void showGiftMenu () {
             boolean gift = discount.canReceiveGift();
             if (gift) {
@@ -88,16 +87,18 @@ public class Controller {
             }
         }
 
-
+    // -----------------------------------------
         public void discountDetails () {
             OutputView.showDiscountDetails();
             discount.saveDiscountAmountAbountAllEvent(date);
         }
 
-        public void showTotalDiscountAmount () {
-            int totalDiscountAmount = discount.totalDiscountAmount();
-            OutputView.showTotalDiscountAmount(totalDiscountAmount);
-        }
+
+
+//        public void showTotalDiscountAmount () {
+//            int totalDiscountAmount = discount.totalDiscountAmount();
+//            OutputView.showTotalDiscountAmount(totalDiscountAmount);
+//        }
         public void showPayAmount () {
             int payAmount = discount.payAmount();
             OutputView.showPayAmount(payAmount);

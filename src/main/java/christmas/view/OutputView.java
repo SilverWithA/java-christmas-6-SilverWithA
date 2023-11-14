@@ -44,6 +44,7 @@ public class OutputView {
     }
 
     public static void showDiscountDetails() {
+        System.out.println();
         System.out.println("<혜택 내역>");
     }
 

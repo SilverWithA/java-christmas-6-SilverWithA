@@ -29,45 +29,44 @@ public class Calculator {
         }
         return christmasDistcountAmount;
     }
+    // 주말 할인 금액 계산
+    public static int calculateWeekendDiscount(Map<String, Integer> orderMenu){
+        int discountAmount = 0;
+        for(String menu : orderMenu.keySet()){
+            if(isMain(menu)){
+                discountAmount += (2023 * orderMenu.get(menu));
+            }
+        }
+        return discountAmount;
+
+    }
+
+    public static boolean isMain(String menu){
+        if(Menu.typeOf(menu) == "메인") {
+            return true;
+        }
+        return false;
+    }
 
     // 평일 할인 계산
     public static int calculateDayDiscount(Map<String, Integer> orderMenu){
         int discountAmount = 0;
         for(String menu : orderMenu.keySet()){
             if(isDesert(menu)){
-                discountAmount += 2023;
+                discountAmount += (2023 * orderMenu.get(menu));
             }
         }
         return discountAmount;
     }
 
-    private static boolean isDesert(String menu){
-        boolean answer = false;
+    public static boolean isDesert(String menu){
         if(Menu.typeOf(menu) == "디저트") {
-            answer = true;
+            return true;
         }
-        return answer;
+        return false;
     }
 
-    public static int calculateWeekendDiscount(Map<String, Integer> orderMenu){
-        int discountAmount = 0;
-        for(String menu : orderMenu.keySet()){
-            if(isMain(menu)){
-                discountAmount += 2023;
-            }
-        }
-        return discountAmount;
-
-    }
-
-    private static boolean isMain(String menu){
-        boolean answer = false;
-        if(Menu.typeOf(menu) == "메인") {
-            answer = true;
-        }
-        return answer;
-    }
-
+    // 스페셜데이 할인금액 계산
     public static int calculateSpecialDiscount(boolean specialDay){
         int discountAmount = 0;
         if(specialDay){

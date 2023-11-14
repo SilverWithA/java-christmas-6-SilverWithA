@@ -13,81 +13,101 @@ public class Discount {
     String GIFT_MENU_NAME = "샴페인";
     boolean receivedGift = false;
     int giftPrice = 0;
-    int christmasDistcountAmount;
-    int dayDistcountAmount;
-    int weekendDistcountAmount;
-    int specialDistcountAmount;
-    int totalDiscountAmount;
+    int christmasDistcountAmount = 0;
+    int dayDistcountAmount = 0;
+    int weekendDistcountAmount = 0;
+    int specialDistcountAmount = 0;
+    int totalDiscountAmount = 0;
 
-    public void setOrderMenu(Map<String, Integer> orderMenu){
+    public void setOrderMenu(Map<String, Integer> orderMenu) {
         this.orderMenu = orderMenu;
     }
 
 
     // 할인 전 총 구매금액
-    public void setTotalAmountBeforeDiscount(int totalAmountBeforeDiscount){
+    public void setTotalAmountBeforeDiscount(int totalAmountBeforeDiscount) {
         this.totalAmountBeforeDiscount = totalAmountBeforeDiscount;
     }
 
-    public int getTotalAmountBeforeDiscount(){
+    public int getTotalAmountBeforeDiscount() {
         return this.totalAmountBeforeDiscount;
     }
 
     // 증정품
-    public boolean canReceiveGift(){
-        if(totalAmountBeforeDiscount >= PRICE_TO_GIVE_GIFT){
+    public boolean canReceiveGift() {
+        if (totalAmountBeforeDiscount >= PRICE_TO_GIVE_GIFT) {
             this.receivedGift = true;
             this.giftPrice = Menu.priceOf(GIFT_MENU_NAME);
             return true;
         }
-//        else if(totalAmountBeforeDiscount < PRICE_TO_GIVE_GIFT){
-//            return false;
-//        }
         return false;
     }
 
-    public void saveDiscountAmountAbountAllEvent(Date date){
-        //크리스마스 할인 금액 저장
-        setChristmasDistcountAmount(date.canChristmasDiscount());
+    public void saveDiscountAmountAbountAllEvent(Date date) {
 
-        // 평일-주말 할인 금액 저장
-        if(date.getWeekend()){
-            setWeekendDistcountAmount(Calculator.calculateWeekendDiscount(orderMenu));
-        }else if(!date.getWeekend()){
-            setDayDistcountAmount(Calculator.calculateWeekendDiscount(orderMenu));
+        setChristmasDistcountAmount(date);
+
+        boolean weekend = date.getWeekend();
+
+        if (weekend) {
+            int discountAmount = Calculator.calculateWeekendDiscount(orderMenu);
+            setWeekendDistcountAmount(discountAmount);
+        } else if (!weekend) {
+            int discountAmount = Calculator.calculateDayDiscount(orderMenu);
+            setDayDistcountAmount(discountAmount);
         }
 
-        // 특별 할인 금액 저장
-        setSpecialDistcountAmount(date.canSpecialDiscount());
-
-        // 증정 이벤트
-        System.out.println(String.format("증정 이벤트: -%,d원",giftPrice, 3));
+        setSpecialDistcountAmount(date);
+        showGiftPrice();
     }
 
     //크리스마스 할인
-    public void setChristmasDistcountAmount(int christmasDistcountAmount){
-        this.christmasDistcountAmount = christmasDistcountAmount;
-        System.out.println(String.format("크리스마스 디데이 할인: - %,d원", christmasDistcountAmount, 3));
+    public void setChristmasDistcountAmount(Date date) {
+        int christmasDistcountAmount = date.canChristmasDiscount();
+        if (christmasDistcountAmount > 0) {
+            this.christmasDistcountAmount = christmasDistcountAmount;
+            System.out.println(String.format("크리스마스 디데이 할인: -%,d원", christmasDistcountAmount, 3));
+        }
     }
+
+    public int getChristmasDistcountAmount(){
+        return this.christmasDistcountAmount;
+    }
+
+    // 주말 할인 설정
+    public void setWeekendDistcountAmount(int discountAmount) {
+        if (discountAmount > 0) {
+            this.weekendDistcountAmount = discountAmount;
+            System.out.println(String.format("주말 할인: -%,d원", weekendDistcountAmount, 3));
+        }
+    }
+
 
     // 평일 할인 설정
-    public void setDayDistcountAmount(int discountAmount){
-        this.dayDistcountAmount = discountAmount;
-        System.out.println(String.format("평일 할인: -%,d원",dayDistcountAmount, 3));
-
-    }
-    // 주말 할인 설정
-    public void setWeekendDistcountAmount(int discountAmount){
-        this.weekendDistcountAmount = discountAmount;
-        System.out.println(String.format("주말 할인: -%,d원",weekendDistcountAmount, 3));
-    }
-    // 특별 할인 설정
-    public void setSpecialDistcountAmount(int discountAmount){
-        this.specialDistcountAmount = discountAmount;
-        System.out.println(String.format("특별 할인: -%,d원",specialDistcountAmount, 3));
+    public void setDayDistcountAmount(int discountAmount) {
+                if (discountAmount > 0) {
+            this.dayDistcountAmount = discountAmount;
+            System.out.println(String.format("평일 할인: -%,d원", dayDistcountAmount, 3));
+        }
     }
 
-    public int totalDiscountAmount(){
+
+    // 특별 할인 설정 Date date
+    public void setSpecialDistcountAmount(Date date) {
+        int discountAmount = date.canSpecialDiscount();
+        if (discountAmount > 0) {
+            this.specialDistcountAmount = discountAmount;
+            System.out.println(String.format("특별 할인: -%,d원", specialDistcountAmount, 3));
+        }
+    }
+
+    public void showGiftPrice(){
+        if(giftPrice > 0){
+            System.out.println(String.format("증정 이벤트: -%,d원", giftPrice, 3));
+        }
+    }
+
+    public int sumTotalDiscountAmount() {
         this.totalDiscountAmount = this.christmasDistcountAmount
                 + this.dayDistcountAmount
                 + this.weekendDistcountAmount
@@ -96,16 +116,16 @@ public class Discount {
         return this.totalDiscountAmount;
     }
 
-    public int payAmount(){
+    public int payAmount() {
         return totalAmountBeforeDiscount - totalDiscountAmount;
     }
 
-    public void badge(){
-        if(totalDiscountAmount > 2000){
+    public void badge() {
+        if (totalDiscountAmount > 2000) {
             System.out.println("산타");
-        }else if(totalDiscountAmount > 10000){
+        } else if (totalDiscountAmount > 10000) {
             System.out.println("트리");
-        }else if(totalDiscountAmount > 5000){
+        } else if (totalDiscountAmount > 5000) {
             System.out.println("별");
         }
     }

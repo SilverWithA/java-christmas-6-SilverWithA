@@ -28,4 +28,17 @@ public class DiscountTest {
         discount.setTotalAmountBeforeDiscount(10000);
         assertThat(discount.canReceiveGift()).isFalse();
     }
+
+
+    @Test
+    void 크리스마스_할인금액_설정테스트(){
+        Discount discount = new Discount();
+        Date date = new Date();
+        date.setDate(25);
+        discount.setChristmasDistcountAmount(date);
+
+        assertThat(discount.getChristmasDistcountAmount()).isEqualTo(3400);
+    }
+
+
 }

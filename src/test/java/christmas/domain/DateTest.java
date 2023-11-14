@@ -44,4 +44,42 @@ public class DateTest {
 
         assertThat(date.getSpecialDay()).isTrue();
     }
+    @Test
+    @DisplayName("계산된 크리스마스 할인금액이 잘 반환되는지 확인하는 테스트")
+    void 크리스마스_할인금액_설정테스트_1일(){
+        Date date = new Date();
+        date.setDate(1);
+        int christmasDistcountAmount = date.canChristmasDiscount();
+
+        assertThat(christmasDistcountAmount).isEqualTo(1000);
+    }
+
+    @Test
+    @DisplayName("계산된 크리스마스 할인금액이 잘 반환되는지 확인하는 테스트")
+    void 크리스마스_할인금액_설정테스트_25일(){
+        Date date = new Date();
+        date.setDate(25);
+        int christmasDistcountAmount = date.canChristmasDiscount();
+
+        assertThat(christmasDistcountAmount).isEqualTo(3400);
+    }
+
+    @Test
+    @DisplayName("주문일이 주말인지 판단하는지 테스트-1일")
+    void 주문일_주말여부_판단테스트(){
+        Date date = new Date();
+        date.isWeekend(1);
+
+        assertThat(date.getWeekend()).isTrue();
+    }
+
+    @Test
+    @DisplayName("주문일이 주말인지 판단하는지 테스트-3일")
+    void 주문일_평일여부_판단테스트(){
+        Date date = new Date();
+        date.isWeekend(3);
+
+        assertThat(date.getWeekend()).isFalse();
+    }
+
 }
