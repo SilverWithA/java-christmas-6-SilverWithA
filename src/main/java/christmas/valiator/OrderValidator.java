@@ -7,7 +7,6 @@ import java.util.*;
 public class OrderValidator {
     static int MAX_ORDER_COUNT = 20;
 
-
     public static void validateMenuName(List<String> orderMenuName ) {
 
         isExistMenu(orderMenuName);

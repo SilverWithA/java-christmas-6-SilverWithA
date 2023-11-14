@@ -89,7 +89,7 @@ public class Controller {
         OutputView.viewDiscountDetails();
         boolean eventApplicability = event.getApplicableOrderAmount();
         if(eventApplicability){
-            event.saveDiscountAmountAbountAllEvent(discount, date, order);
+            event.applyDiscountAbountAllEvent(discount, date, order);
         }else if(!eventApplicability){
             OutputView.noEvnetHistory();
         }

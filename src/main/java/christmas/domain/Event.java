@@ -36,7 +36,7 @@ public class Event {
     }
 
     // 모든 할인 금액 설정
-    public void saveDiscountAmountAbountAllEvent(Discount discount, Date date, Order order) {
+    public void applyDiscountAbountAllEvent(Discount discount, Date date, Order order) {
         discount.setChristmasDistcountAmount(date);
         setDateDiscount(discount, date, order);
         discount.setSpecialDistcountAmount(date);
