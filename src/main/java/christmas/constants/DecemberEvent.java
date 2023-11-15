@@ -1,6 +1,5 @@
 package christmas.constants;
 
-import org.mockito.internal.matchers.Null;
 
 public enum DecemberEvent {
 
@@ -24,7 +23,7 @@ public enum DecemberEvent {
     private final int price;
     private final int count;
 
-    private DecemberEvent(String name, int price, int count) {
+    DecemberEvent(String name, int price, int count) {
         this.name = name;
         this.price = price;
         this.count = count;

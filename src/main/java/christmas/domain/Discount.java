@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import christmas.constants.Menu;
 import christmas.utils.Calculator;
 import christmas.view.OutputView;
 

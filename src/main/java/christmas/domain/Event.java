@@ -2,9 +2,6 @@ package christmas.domain;
 
 import christmas.constants.DecemberEvent;
 import christmas.constants.Menu;
-import christmas.utils.Calculator;
-
-import java.util.Map;
 
 public class Event {
 

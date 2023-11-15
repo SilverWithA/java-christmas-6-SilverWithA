@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import christmas.utils.Calculator;
 import christmas.valiator.OrderValidator;
 
 import java.util.ArrayList;
