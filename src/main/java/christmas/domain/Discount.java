@@ -7,7 +7,7 @@ import christmas.view.OutputView;
 import java.util.Map;
 
 public class Discount {
-    int totalAmountBeforeDiscount;
+    int totalAmount;
     int giftPrice = 0;
     int christmasDistcountAmount = 0;
     int dayDistcountAmount = 0;
@@ -16,15 +16,12 @@ public class Discount {
     int totalDiscountAmount = 0;
 
 
-
-
-    // 할인 전 총 구매금액
-    public void setTotalAmountBeforeDiscount(int totalAmountBeforeDiscount) {
-        this.totalAmountBeforeDiscount = totalAmountBeforeDiscount;
+    public void setTotalAmount(int totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
-    public int getTotalAmountBeforeDiscount() {
-        return this.totalAmountBeforeDiscount;
+    public int getTotalAmount() {
+        return this.totalAmount;
     }
 
     public void setGiftPrice(int giftPrice){
@@ -89,8 +86,8 @@ public class Discount {
         return totalDiscountAmount;
     }
 
-    public int calculatePayAmount() {
-        return totalAmountBeforeDiscount - totalDiscountAmount;
+    public int calculatePayAmountAfterDiscount() {
+        return totalAmount - totalDiscountAmount;
     }
 
     public int getTotalDiscountAmount(){

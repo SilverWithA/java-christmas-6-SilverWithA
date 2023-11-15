@@ -13,7 +13,9 @@ public enum Message {
     NOTHING("없음"),
     EVENT_HISTORY("<혜택 내역>"),
     TOTAL_BENEFITS_AMOUNT("<총혜택 금액>"),
-    PAY_AMOUNT_AFTER_DISCOUNT("<할인 후 예상 결제 금액>");
+    PAY_AMOUNT_AFTER_DISCOUNT("<할인 후 예상 결제 금액>"),
+
+    EVENT_BADGE("<12월 이벤트 배지>");
 
 
      private final String messgae;

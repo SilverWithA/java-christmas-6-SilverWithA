@@ -5,6 +5,7 @@ import christmas.domain.Date;
 import christmas.domain.Event;
 import christmas.domain.Discount;
 import christmas.domain.Order;
+import christmas.utils.Calculator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -21,13 +22,13 @@ public class Controller {
         askOrderMenu();
         showOrderMenu();
 
-        showTotalOrderAmountBeforeDiscount();
+        showTotalOrderAmount();
         showGiftMenu();
 
         showDiscountDetails();
         showTotalDiscountAmount();
 
-        showPayAmount();
+        showPayAmounAfterDiscountt();
         showEventBadage();
     }
 
@@ -71,14 +72,16 @@ public class Controller {
         OutputView.viewOrderMenuHistory(date.getDate(), order.getOrderMenu());
     }
 
-    public void showTotalOrderAmountBeforeDiscount() {
-        int totalAmountBeforeDiscount = order.totalAmountOrder();
-        discount.setTotalAmountBeforeDiscount(totalAmountBeforeDiscount);
-        OutputView.viewTotalOrderAmountBeforeDiscount(totalAmountBeforeDiscount);
+    public void showTotalOrderAmount() {
+        int totalAmount = Calculator.calculateTotalAmount(order.getOrderMenu());
+        discount.setTotalAmount(totalAmount);
+
+        OutputView.viewTotalOrderAmount(totalAmount);
     }
     public void showGiftMenu() {
         boolean gift = event.canReceiveGift(discount);
         OutputView.viewGiftHistory();
+
         if (gift) {
             OutputView.giveGift();
         } else if (!gift) {
@@ -89,10 +92,11 @@ public class Controller {
 
     public void showDiscountDetails() {
         OutputView.viewDiscountDetails();
-        boolean eventApplicability = event.getApplicableOrderAmount();
-        if(eventApplicability){
+
+        boolean eventBenefits = event.getEventBenefits();
+        if(eventBenefits){
             event.applyDiscountAbountAllEvent(discount, date, order);
-        }else if(!eventApplicability){
+        }else if(!eventBenefits){
             OutputView.noEvnetHistory();
         }
 
@@ -111,12 +115,13 @@ public class Controller {
         }
     }
 
-    public void showPayAmount() {
-        int payAmount = discount.calculatePayAmount();
-        OutputView.viewPayAmount(payAmount);
+    public void showPayAmounAfterDiscountt() {
+        int payAmountAfterDiscount = discount.calculatePayAmountAfterDiscount();
+        OutputView.viewPayAmountAfterDiscount(payAmountAfterDiscount);
     }
 
     public void showEventBadage() {
-        event.showEventBadge(discount);
+        int totalDiscountAmount = discount.getTotalDiscountAmount();
+        OutputView.viewEventBadge(totalDiscountAmount);
     }
 }

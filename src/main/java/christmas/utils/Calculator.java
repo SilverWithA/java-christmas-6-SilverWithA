@@ -10,7 +10,7 @@ public class Calculator {
 
 
     //할인 전 총 구매금액
-    public static int calculateTotalAmountBeforeDiscount(Map<String, Integer> orderMenu){
+    public static int calculateTotalAmount(Map<String, Integer> orderMenu){
         int totalAmount = 0;
         for(String orderName : orderMenu.keySet()){
             int orderCount = orderMenu.get(orderName);

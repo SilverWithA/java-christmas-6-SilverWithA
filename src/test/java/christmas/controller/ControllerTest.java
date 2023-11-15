@@ -44,7 +44,7 @@ public class ControllerTest {
     // -------------------------------------------------------
     void 주문메뉴_출력테스트(){
         Controller controller = new Controller();
-        controller.showTotalOrderAmountBeforeDiscount();
+        controller.showTotalOrderAmount();
 
     }
 

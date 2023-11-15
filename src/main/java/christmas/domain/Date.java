@@ -35,7 +35,7 @@ public class Date {
         isSpecialDay(this.vistitDate);
     }
 
-    public boolean getWeekend() {
+    public boolean getWeekendOrNot() {
         return weekendOrNot;
     }
 

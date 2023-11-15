@@ -92,8 +92,4 @@ public class Order {
         return OrderMap;
     }
 
-    public int totalAmountOrder() {
-        return Calculator.calculateTotalAmountBeforeDiscount(orderMenu);
-    }
-
 }

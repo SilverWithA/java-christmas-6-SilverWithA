@@ -26,7 +26,7 @@ public class OutputView {
         }
     }
 
-    public static void viewTotalOrderAmountBeforeDiscount(int totalAmountBeforeDiscount) {
+    public static void viewTotalOrderAmount(int totalAmountBeforeDiscount) {
         System.out.println();
         System.out.println(Message.TOTAL_ORDER_AMOUNT.getMessgae());
         System.out.println(String.format("%,d원", totalAmountBeforeDiscount, 3));
@@ -78,11 +78,34 @@ public class OutputView {
 
 
 
-    public static void viewPayAmount(int payAmount) {
+    public static void viewPayAmountAfterDiscount(int payAmount) {
         System.out.println();
         System.out.println(Message.PAY_AMOUNT_AFTER_DISCOUNT.getMessgae());
         System.out.println(String.format("%,d원", payAmount, 3));
     }
 
+    public static void viewEventBadgeTitle(){
+        System.out.println();
+        System.out.println(Message.EVENT_BADGE.getMessgae());
+    }
+    public static void viewEventBadge(int totalDiscountAmount){
+        DecemberEvent firstEventBadge = DecemberEvent.FIRST_EVENT_BADGE;
+        DecemberEvent secondEventBadge = DecemberEvent.SECOND_EVENT_BADGE;
+        DecemberEvent thirdEventBadge = DecemberEvent.THIRD_EVENT_BADGE;
+        DecemberEvent noEventBadge = DecemberEvent.EVENT_BADGE_NOTHING;
+
+        if (totalDiscountAmount > firstEventBadge.getPrice()) {
+            System.out.println(firstEventBadge.getName());
+
+        } else if (totalDiscountAmount > secondEventBadge.getPrice()) {
+            System.out.println(secondEventBadge.getName());
+
+        } else if (totalDiscountAmount > thirdEventBadge.getPrice()) {
+            System.out.println(thirdEventBadge.getName());
+
+        } else if (totalDiscountAmount == noEventBadge.getPrice()) {
+            System.out.println(noEventBadge.getName());
+        }
+    }
 
 }
