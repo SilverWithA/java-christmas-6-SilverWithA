@@ -47,8 +47,10 @@ public class Controller {
     public void checkValidationVistitDate(String inputDate) {
         int vistitDate = Integer.parseInt(inputDate);
         date.isInRange(vistitDate);
-        date.setDate(vistitDate);
+        date.setVistitDate(vistitDate);
     }
+
+    // ---------------------------------------------
 
 
     public void askOrderMenu() {
@@ -69,7 +71,7 @@ public class Controller {
 
 
     public void showOrderMenu() {
-        OutputView.viewOrderMenuHistory(date.getDate(), order.getOrderMenu());
+        OutputView.viewOrderMenuHistory(date.getVisitdate(), order.getOrderMenu());
     }
 
     public void showTotalOrderAmount() {
@@ -91,7 +93,7 @@ public class Controller {
 
 
     public void showDiscountDetails() {
-        OutputView.viewDiscountDetails();
+        OutputView.viewDiscountDetailsTitle();
 
         boolean eventBenefits = event.getEventBenefits();
         if(eventBenefits){

@@ -6,49 +6,63 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class DateTest {
 
     @Test
-    @DisplayName("isIsRange: 1 ~ 31 사이의 수가 아니면 에러를 일으키는지 테스트")
-    void 범위체크_매서드테스트(){
+    @DisplayName("입력한 방문일이 범위에 속한 일자가 아니면 에러를 일으키는지 테스트")
+    void 방문일_범위체크_범위수아님_테스트(){
         Date date = new Date();
 
-        assertThatThrownBy(() -> date.isInRange(33))
+        assertThatThrownBy(() -> date.isInRange(32))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("setDate: 유효한 date를 변수에 저장하는지 테스트")
-    void 주문일_저장_테스트(){
+    @DisplayName("입력한 방문일이 범위에 속한 일자가 일때 에러를 일으키지 않는지 검증")
+    void 방문일_범위체크_범위수_테스트(){
         Date date = new Date();
-        date.setDate(3);
 
-        assertThat(date.getDate()).isEqualTo(3);
+        assertDoesNotThrow(() -> date.isInRange(31));
+    }
+
+
+
+    @Test
+    @DisplayName("입력한 방문일의 주말/특별 할인일 여부를 알맞게 판단하여 저장하는는지 확인하는 테스트")
+    void 방문일_정보_판단테스트(){
+        Date date = new Date();
+        date.setVistitDate(3);
+
+        assertThat(date.getVisitdate()).isEqualTo(3);
+        assertThat(date.getWeekendOrNot()).isFalse();
+        assertThat(date.getSpecialDayOrNot()).isTrue();
     }
 
     @Test
-    @DisplayName("setDate: 유효한 date가 주말여부인지 판단하며 저장하는지 테스트")
+    @DisplayName("입력한 방문일의 주말 여부를 알맞게 판단하는지 테스트")
     void 주문일_주말여부_테스트(){
         Date date = new Date();
-        date.setDate(3);
+        date.setVistitDate(3);
 
-        assertThat(date.getWeekend()).isFalse();
+        assertThat(date.getWeekendOrNot()).isFalse();
     }
 
     @Test
-    @DisplayName("setDate: 유효한 date가 특별할인일인지 판단하며 저장하는지 테스트")
+    @DisplayName("입력한 방문일이 특별 할인일 여부를 알맞게 판단하는지 테스트")
     void 주문일_특별할인일_테스트(){
         Date date = new Date();
-        date.setDate(3);
+        date.setVistitDate(3);
 
         assertThat(date.getSpecialDayOrNot()).isTrue();
     }
+    // -------------------------------------------------------
     @Test
     @DisplayName("계산된 크리스마스 할인금액이 잘 반환되는지 확인하는 테스트")
     void 크리스마스_할인금액_설정테스트_1일(){
         Date date = new Date();
-        date.setDate(1);
+        date.setVistitDate(1);
         int christmasDistcountAmount = date.canChristmasDiscount();
 
         assertThat(christmasDistcountAmount).isEqualTo(1000);
@@ -58,7 +72,7 @@ public class DateTest {
     @DisplayName("계산된 크리스마스 할인금액이 잘 반환되는지 확인하는 테스트")
     void 크리스마스_할인금액_설정테스트_25일(){
         Date date = new Date();
-        date.setDate(25);
+        date.setVistitDate(25);
         int christmasDistcountAmount = date.canChristmasDiscount();
 
         assertThat(christmasDistcountAmount).isEqualTo(3400);
@@ -70,7 +84,7 @@ public class DateTest {
         Date date = new Date();
         date.isWeekend(1);
 
-        assertThat(date.getWeekend()).isTrue();
+        assertThat(date.getWeekendOrNot()).isTrue();
     }
 
     @Test
@@ -79,7 +93,7 @@ public class DateTest {
         Date date = new Date();
         date.isWeekend(3);
 
-        assertThat(date.getWeekend()).isFalse();
+        assertThat(date.getWeekendOrNot()).isFalse();
     }
 
 }

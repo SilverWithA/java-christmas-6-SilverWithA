@@ -46,7 +46,7 @@ public class OutputView {
         System.out.println(Message.NOTHING.getMessgae());
     }
 
-    public static void viewDiscountDetails() {
+    public static void viewDiscountDetailsTitle() {
         System.out.println();
         System.out.println(Message.EVENT_HISTORY.getMessgae());
     }

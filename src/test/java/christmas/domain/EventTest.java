@@ -10,14 +10,14 @@ public class EventTest {
     void 증정품_제공_테스트_(){
         Event event = new Event();
         Discount discount = new Discount();
-        discount.setTotalAmountBeforeDiscount(120000);
+        discount.setTotalAmount(120000);
         assertThat(event.canReceiveGift(discount)).isTrue();
     }
     @Test
     void 증정품_미제공_테스트_(){
         Event event = new Event();
         Discount discount = new Discount();
-        discount.setTotalAmountBeforeDiscount(10000);
+        discount.setTotalAmount(10000);
         assertThat(event.canReceiveGift(discount)).isFalse();
     }
 }

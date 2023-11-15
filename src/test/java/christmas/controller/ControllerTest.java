@@ -36,7 +36,7 @@ public class ControllerTest {
     }
 
     @Test
-    void 주문일_주문기능까지_테스트(){
+    void 방문일입력부터_주문기능입력까지_테스트(){
         Controller controller = new Controller();
         assertDoesNotThrow(()-> controller.checkValidationVistitDate("3"));
         assertDoesNotThrow(()-> controller.checkOrder("해산물파스타-3,샴페인-1"));

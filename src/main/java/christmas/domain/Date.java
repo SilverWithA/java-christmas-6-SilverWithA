@@ -11,14 +11,15 @@ import java.util.Arrays;
 public class Date {
     int vistitDate;
     boolean weekendOrNot = false;
-    List<DecemberSpecialDays> specialDaysInformation = DecemberSpecialDays.getSpecialDays();
     boolean specialDayOrNot = false;
+    List<DecemberSpecialDays> specialDaysInformation = DecemberSpecialDays.getSpecialDays();
 
-    public int getDate() {
+
+    public int getVisitdate() {
         return this.vistitDate;
     }
 
-    public boolean getSpecialDay() {
+    public boolean getSpecialDayOrNot() {
         return specialDayOrNot;
     }
 
@@ -29,7 +30,7 @@ public class Date {
         }
     }
 
-    public void setDate(int vistitDate) {
+    public void setVistitDate(int vistitDate) {
         this.vistitDate = vistitDate;
         isWeekend(this.vistitDate);
         isSpecialDay(this.vistitDate);
