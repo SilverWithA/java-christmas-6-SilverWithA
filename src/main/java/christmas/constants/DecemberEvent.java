@@ -8,7 +8,16 @@ public enum DecemberEvent {
     FIRST_EVENT_BADGE("산타", 20000),
     SECOND_EVENT_BADGE("트리", 10000),
     THIRD_EVENT_BADGE("별", 5000),
-    EVENT_BADGE_NOTHING("없음", 0);
+    EVENT_BADGE_NOTHING("없음", 0),
+
+    CHRISTMAS_START_AMOUNT(null,1000),
+    CHRISTMAS_INCREASE_UNIT(null,100),
+    DAY_DISCOUNT_AMOUNT(null,2023),
+    SPECIAL_DISCOUNT_AMOUNT(null,1000),
+    WEEKDAY_DISCOUNT_MENU("디저트",2023),
+    WEEKEND_DISCOUNT_MENU("메인",2023);
+
+
 
     private final String name;
     private final int price;
