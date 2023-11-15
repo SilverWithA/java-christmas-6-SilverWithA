@@ -75,19 +75,18 @@ public class Discount {
 
     public void showGiftPrice(){
         if(giftPrice > 0){
-            System.out.println(String.format("증정 이벤트: -%,d원", giftPrice, 3));
+            OutputView.viewGiftEvent(giftPrice);
         }
     }
 
-    public int sumTotalDiscountAmount() {
+    public void sumTotalDiscountAmount() {
         this.totalDiscountAmount = christmasDistcountAmount
                 + dayDistcountAmount + weekendDistcountAmount
                 + specialDistcountAmount + giftPrice;
-        return totalDiscountAmount;
     }
 
     public int calculatePayAmountAfterDiscount() {
-        return totalAmount - totalDiscountAmount;
+        return totalAmount - totalDiscountAmount + giftPrice;
     }
 
     public int getTotalDiscountAmount(){

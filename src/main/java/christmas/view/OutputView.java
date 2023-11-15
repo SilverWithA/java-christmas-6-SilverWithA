@@ -67,6 +67,10 @@ public class OutputView {
         System.out.println(String.format("특별 할인: -%,d원", specialDistcountAmount, 3));
     }
 
+    public static void viewGiftEvent(int specialDistcountAmount) {
+        System.out.println(String.format("증정 이벤트: -%,d원", specialDistcountAmount, 3));
+    }
+
     public static void viewTotalDiscountAmountTitle() {
         System.out.println();
         System.out.println(Message.TOTAL_BENEFITS_AMOUNT.getMessgae());

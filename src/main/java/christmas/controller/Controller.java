@@ -77,9 +77,9 @@ public class Controller {
     public void showTotalOrderAmount() {
         int totalAmount = Calculator.calculateTotalAmount(order.getOrderMenu());
         discount.setTotalAmount(totalAmount);
-
         OutputView.viewTotalOrderAmount(totalAmount);
     }
+
     public void showGiftMenu() {
         boolean gift = event.canReceiveGift(discount);
         OutputView.viewGiftHistory();
@@ -94,11 +94,10 @@ public class Controller {
 
     public void showDiscountDetails() {
         OutputView.viewDiscountDetailsTitle();
+        event.applyDiscountAbountAllEvent(discount, date, order);
 
         boolean eventBenefits = event.getEventBenefits();
-        if(eventBenefits){
-            event.applyDiscountAbountAllEvent(discount, date, order);
-        }else if(!eventBenefits){
+        if(!eventBenefits){
             OutputView.noEvnetHistory();
         }
 
@@ -107,7 +106,7 @@ public class Controller {
 
 
     public void showTotalDiscountAmount() {
-        int totalDiscountAmount = discount.sumTotalDiscountAmount();
+        int totalDiscountAmount = discount.getTotalDiscountAmount();
         OutputView.viewTotalDiscountAmountTitle();
 
         if(totalDiscountAmount > 0){
@@ -124,6 +123,7 @@ public class Controller {
 
     public void showEventBadage() {
         int totalDiscountAmount = discount.getTotalDiscountAmount();
+        OutputView.viewEventBadgeTitle();
         OutputView.viewEventBadge(totalDiscountAmount);
     }
 }

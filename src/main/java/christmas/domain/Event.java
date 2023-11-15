@@ -32,6 +32,8 @@ public class Event {
         discount.setChristmasDistcountAmount(date);
         setDateDiscount(discount, date, order);
         discount.setSpecialDistcountAmount(date);
+        discount.showGiftPrice();
+
         checkThereIsEventBenefits(discount);
     }
 
@@ -50,6 +52,8 @@ public class Event {
     }
 
     public void checkThereIsEventBenefits(Discount discount) {
+        discount.sumTotalDiscountAmount();
+
         if (discount.getTotalDiscountAmount() > 0) {
             this.eventBenefits = true;
         } else if (discount.getTotalDiscountAmount() == 0) {
