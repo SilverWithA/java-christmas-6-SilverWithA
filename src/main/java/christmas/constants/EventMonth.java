@@ -10,4 +10,8 @@ public enum EventMonth {
     private EventMonth(int day){
         this.day = day;
     }
+
+    public int getDay(){
+        return day;
+    }
 }

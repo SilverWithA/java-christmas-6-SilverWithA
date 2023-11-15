@@ -42,7 +42,7 @@ public class DateTest {
         Date date = new Date();
         date.setDate(3);
 
-        assertThat(date.getSpecialDay()).isTrue();
+        assertThat(date.getSpecialDayOrNot()).isTrue();
     }
     @Test
     @DisplayName("계산된 크리스마스 할인금액이 잘 반환되는지 확인하는 테스트")
