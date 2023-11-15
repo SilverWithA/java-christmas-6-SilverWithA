@@ -13,7 +13,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("할인 전 총 주문 금액이 올바르게 계산되는지 검증")
-    void 할인_전_총금액_테스트(){
+    void calculateTotalAmountTest(){
         Map<String, Integer> orderMenu = Map.of("해산물파스타", 2, "레드와인", 1, "초코케이크", 1);
         int totalAmount = Calculator.calculateTotalAmount(orderMenu);
 
@@ -22,42 +22,42 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("주문일 기준 크리스마스 할인금액 계산 검증-1일")
-    void 크리스마스_할인_계산테스트_1일(){
+    void calculateChristmasDistcountTest_DAY1(){
         int discountAmount = Calculator.calculateChristmasDistcount(1);
         assertThat(discountAmount).isEqualTo(1000);
     }
 
     @Test
     @DisplayName("주문일 기준 크리스마스 할인금액 계산 검증-25일")
-    void 크리스마스_할인_계산테스트_25일() {
+    void calculateChristmasDistcountTest_DAY25() {
         int discountAmount = Calculator.calculateChristmasDistcount(25);
         assertThat(discountAmount).isEqualTo(3400);
     }
 
     @Test
     @DisplayName("주문일 기준 크리스마스 할인금액 계산 검증-26일")
-    void 크리스마스_할인_계산테스트_26일() {
+    void calculateChristmasDistcountTest_DAY26() {
         int discountAmount = Calculator.calculateChristmasDistcount(26);
         assertThat(discountAmount).isEqualTo(0);
     }
 
     @Test
     @DisplayName("메뉴가 메인메뉴인지 참 판단 태스트")
-    void 메인메뉴_판단테스트_참(){
+    void isMainTest_True(){
         boolean actual = Calculator.isMain("티본스테이크");
         assertThat(actual).isTrue();
     }
 
     @Test
     @DisplayName("메뉴가 메인메뉴인지 거짓 판단 태스트")
-    void 메인메뉴_판단테스트_거짓(){
+    void isMainTest_False(){
         boolean actual = Calculator.isMain("시저샐러드");
         assertThat(actual).isFalse();
     }
 
     @Test
     @DisplayName("메인메뉴 주문 있을때 주말 할인 금액 계산 테스트")
-    void 주말_할인금액_계산테스트_메인있음(){
+    void calculateWeekendDiscountTest_Main(){
         Map<String, Integer> orderMenu = Map.of("양송이수프",2,"티본스테이크",2);
         int discountAmount = Calculator.calculateWeekendDiscount(orderMenu);
 
@@ -66,7 +66,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("메인메뉴 주문 없을 때 주말 할인 금액 계산 테스트")
-    void 주말_할인금액_계산테스트_메인없음(){
+    void calculateWeekendDiscountTest_NoMain(){
         Map<String, Integer> orderMenu = Map.of("양송이수프",2);
         int discountAmount = Calculator.calculateWeekendDiscount(orderMenu);
 
@@ -75,21 +75,21 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("메뉴가 디저트메뉴인지 참 판단 태스트")
-    void 디저트메뉴_판단테스트_참(){
+    void isDesertTest_True(){
         boolean actual = Calculator.isDesert("아이스크림");
         assertThat(actual).isTrue();
     }
 
     @Test
     @DisplayName("메뉴가 디저트메뉴인지 거짓 판단 태스트")
-    void 디저트메뉴_판단테스트_거짓ㅈ(){
+    void isDesertTest_False(){
         boolean actual = Calculator.isDesert("양송이수프");
         assertThat(actual).isFalse();
     }
 
     @Test
     @DisplayName("디저트메뉴 주문 있을 때 평일 할인 금액 계산 테스트")
-    void 평일_할인금액_계산테스트_디저트있음(){
+    void calculateDayDiscount_Dissert(){
         Map<String, Integer> orderMenu = Map.of("아이스크림",2);
         int discountAmount = Calculator.calculateDayDiscount(orderMenu);
 
@@ -98,7 +98,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("디저트메뉴 주문 없을 때 평일 할인 금액 계산 테스트")
-    void 평일_할인금액_계산테스트_디저트없음(){
+    void calculateDayDiscount_NoDissert(){
         Map<String, Integer> orderMenu = Map.of("양송이수프",2);
         int discountAmount = Calculator.calculateDayDiscount(orderMenu);
 
@@ -107,7 +107,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("스페셜데이 해당시 할인 금액 테스트")
-    void 스페셜_할인금액_계산테스트_해당있음(){
+    void calculateSpecialDiscountTest(){
         boolean specialDay = true;
         int discountAmount = Calculator.calculateSpecialDiscount(specialDay);
 
@@ -116,7 +116,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("스페셜데이 해당되지 않을시ㅐ 할인 금액 테스트")
-    void 스페셜_할인금액_계산테스트_해당없음(){
+    void calculateSpecialDiscountTest_no(){
         boolean specialDay = false;
         int discountAmount = Calculator.calculateSpecialDiscount(specialDay);
 
