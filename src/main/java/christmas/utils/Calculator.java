@@ -34,7 +34,7 @@ public class Calculator {
         int discountAmount = 0;
         for(String menu : orderMenu.keySet()){
             if(isMain(menu)){
-                discountAmount += (DecemberEvent.DAY_DISCOUNT_AMOUNT.getPrice() * orderMenu.get(menu));
+                discountAmount += (DecemberEvent.WEEKEND_DISCOUNT_MENU.getPrice() * orderMenu.get(menu));
             }
         }
         return discountAmount;
@@ -52,7 +52,7 @@ public class Calculator {
         int discountAmount = 0;
         for(String menu : orderMenu.keySet()){
             if(isDesert(menu)){
-                discountAmount += (DecemberEvent.DAY_DISCOUNT_AMOUNT.getPrice() * orderMenu.get(menu));
+                discountAmount += (DecemberEvent.WEEKDAY_DISCOUNT_MENU.getPrice() * orderMenu.get(menu));
             }
         }
         return discountAmount;

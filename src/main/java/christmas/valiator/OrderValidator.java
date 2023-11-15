@@ -1,14 +1,13 @@
 package christmas.valiator;
 
+import christmas.constants.DecemberEvent;
 import christmas.constants.Menu;
 
 import java.util.*;
 
 public class OrderValidator {
-    static int MAX_ORDER_COUNT = 20;
 
-    public static void validateMenuName(List<String> orderMenuName ) {
-
+    public static void validateMenuName(List<String> orderMenuName) {
         isExistMenu(orderMenuName);
         isOrderUnique(orderMenuName);
         isOnlyBeverage(orderMenuName);
@@ -60,7 +59,7 @@ public class OrderValidator {
         for (int eachOrderCount : orderMenuCount) {
             orderCount += eachOrderCount;
         }
-        if (orderCount > MAX_ORDER_COUNT) {
+        if (orderCount > DecemberEvent.MAX_ORDER_COUNT.getCount()) {
             throw new IllegalArgumentException();
         }
     }
@@ -70,7 +69,8 @@ public class OrderValidator {
         Set<String> orderMenuTypeUnique = new HashSet<>(orderMenuType);
 
         for(String element : orderMenuTypeUnique){
-            if (orderMenuTypeUnique.size() == 1 && element == "음료") {
+            if (orderMenuTypeUnique.size() == 1 &&
+                    element == DecemberEvent.CANT_ORDER_ONLY.getName()) {
                 throw new IllegalArgumentException();
             }
         }
