@@ -1,10 +1,9 @@
 package christmas.utils;
 
 import christmas.constants.DecemberEvent;
-import christmas.constants.EventMonth;
+import christmas.constants.EventMonthCalender;
 import christmas.constants.Menu;
 
-import java.util.Arrays;
 import java.util.Map;
 
 public class Calculator {
@@ -24,7 +23,7 @@ public class Calculator {
 
      public static int calculateChristmasDistcount(int date) {
         int christmasDistcountAmount = 0;
-        if (date < EventMonth.CHIRSTMAS_DAY.getDay() + 1) {
+        if (date < EventMonthCalender.CHIRSTMAS_DAY.getDay() + 1) {
             christmasDistcountAmount +=  DecemberEvent.CHRISTMAS_START_AMOUNT.getPrice()
                     + (DecemberEvent.CHRISTMAS_INCREASE_UNIT.getPrice() * (date - 1));
         }

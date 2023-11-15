@@ -1,6 +1,6 @@
 package christmas.constants;
 
-public enum EventMonth {
+public enum EventMonthCalender {
     MONTH_START(1),
     MONTH_END(31),
     CHIRSTMAS_DAY(25),
@@ -8,7 +8,7 @@ public enum EventMonth {
     SECOND_WEEKEND_DAY(2);
 
     private final int day;
-    private EventMonth(int day){
+    EventMonthCalender(int day){
         this.day = day;
     }
 

@@ -42,6 +42,19 @@ public class Discount {
         return this.christmasDistcountAmount;
     }
 
+    public void setDateDiscount(Discount discount, Date date, Order order) {
+        boolean weekend = date.getWeekendOrNot();
+        Map<String, Integer> orderMenu = order.getOrderMenu();
+
+        if (weekend) {
+            int discountAmount = Calculator.calculateWeekendDiscount(orderMenu);
+            discount.setWeekendDistcountAmount(discountAmount);
+        } else if (!weekend) {
+            int discountAmount = Calculator.calculateDayDiscount(orderMenu);
+            discount.setDayDistcountAmount(discountAmount);
+        }
+    }
+
     // 주말 할인 설정
     public void setWeekendDistcountAmount(int discountAmount) {
         if (discountAmount > 0) {

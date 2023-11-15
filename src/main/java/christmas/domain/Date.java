@@ -1,12 +1,11 @@
 package christmas.domain;
 
 import christmas.constants.DecemberSpecialDays;
-import christmas.constants.EventMonth;
+import christmas.constants.EventMonthCalender;
 import christmas.utils.Calculator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 
 public class Date {
     int vistitDate;
@@ -33,8 +32,8 @@ public class Date {
     }
 
     public static void isInRange(int vistitDate) {
-        if (vistitDate < EventMonth.MONTH_START.getDay()
-                | vistitDate > EventMonth.MONTH_END.getDay()) {
+        if (vistitDate < EventMonthCalender.MONTH_START.getDay()
+                | vistitDate > EventMonthCalender.MONTH_END.getDay()) {
             throw new IllegalArgumentException();
         }
     }
@@ -49,8 +48,8 @@ public class Date {
 
     public List<Integer> arrangeWeekendDays() {
         List<Integer> arrangedWeekendDays = new ArrayList<>();
-        int FirstWeekendDay = EventMonth.FIRST_WEEKEND_DAY.getDay();
-        int SecondWeekendDay = EventMonth.SECOND_WEEKEND_DAY.getDay();
+        int FirstWeekendDay = EventMonthCalender.FIRST_WEEKEND_DAY.getDay();
+        int SecondWeekendDay = EventMonthCalender.SECOND_WEEKEND_DAY.getDay();
 
         for (int week = 0; week < 5; week++) {
             arrangedWeekendDays.add(FirstWeekendDay + (7 * week));

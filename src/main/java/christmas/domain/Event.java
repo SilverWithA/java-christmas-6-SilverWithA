@@ -30,7 +30,7 @@ public class Event {
     // 모든 혜택 금액 계산 및 설정
     public void applyDiscountAbountAllEvent(Discount discount, Date date, Order order) {
         discount.setChristmasDistcountAmount(date);
-        setDateDiscount(discount, date, order);
+        discount.setDateDiscount(discount, date, order);
         discount.setSpecialDistcountAmount(date);
         discount.showGiftPrice();
 
@@ -38,18 +38,6 @@ public class Event {
     }
 
 
-    public void setDateDiscount(Discount discount, Date date, Order order) {
-        boolean weekend = date.getWeekendOrNot();
-        Map<String, Integer> orderMenu = order.getOrderMenu();
-
-        if (weekend) {
-            int discountAmount = Calculator.calculateWeekendDiscount(orderMenu);
-            discount.setWeekendDistcountAmount(discountAmount);
-        } else if (!weekend) {
-            int discountAmount = Calculator.calculateDayDiscount(orderMenu);
-            discount.setDayDistcountAmount(discountAmount);
-        }
-    }
 
     public void checkThereIsEventBenefits(Discount discount) {
         discount.sumTotalDiscountAmount();
