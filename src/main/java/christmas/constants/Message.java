@@ -12,6 +12,11 @@ public enum Message {
     GIFT_HISTORY("<증정 메뉴>"),
     NOTHING("없음"),
     EVENT_HISTORY("<혜택 내역>"),
+    CHRISTMAS_AMOUNT("크리스마스 디데이 할인: -%,d원"),
+    WEEKEND_AMOUNT("주말 할인: -%,d원"),
+    WEEKDAY_AMOUNT("평일 할인: -%,d원"),
+    SPECIAL_AMOUNT("특별 할인: -%,d원"),
+    GIFT_EVENT("증정 이벤트: -%,d원"),
     TOTAL_BENEFITS_AMOUNT("<총혜택 금액>"),
     PAY_AMOUNT_AFTER_DISCOUNT("<할인 후 예상 결제 금액>"),
 

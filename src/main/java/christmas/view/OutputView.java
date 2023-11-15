@@ -52,23 +52,23 @@ public class OutputView {
     }
 
     public static void viewChristmasDiscount(int christmasDistcountAmount) {
-        System.out.println(String.format("크리스마스 디데이 할인: -%,d원", christmasDistcountAmount, 3));
+        System.out.println(String.format(Message.CHRISTMAS_AMOUNT.getMessgae(), christmasDistcountAmount, 3));
     }
 
     public static void viewWeekendDistcount(int weekendDistcountAmount) {
-        System.out.println(String.format("주말 할인: -%,d원", weekendDistcountAmount, 3));
+        System.out.println(String.format(Message.WEEKEND_AMOUNT.getMessgae(), weekendDistcountAmount, 3));
     }
 
     public static void viewDayDistcount(int dayDistcountAmount) {
-        System.out.println(String.format("평일 할인: -%,d원", dayDistcountAmount, 3));
+        System.out.println(String.format(Message.WEEKDAY_AMOUNT.getMessgae(), dayDistcountAmount, 3));
     }
 
     public static void viewSpecialDistcount(int specialDistcountAmount) {
-        System.out.println(String.format("특별 할인: -%,d원", specialDistcountAmount, 3));
+        System.out.println(String.format(Message.SPECIAL_AMOUNT.getMessgae(), specialDistcountAmount, 3));
     }
 
     public static void viewGiftEvent(int specialDistcountAmount) {
-        System.out.println(String.format("증정 이벤트: -%,d원", specialDistcountAmount, 3));
+        System.out.println(String.format(Message.GIFT_EVENT.getMessgae(), specialDistcountAmount, 3));
     }
 
     public static void viewTotalDiscountAmountTitle() {
