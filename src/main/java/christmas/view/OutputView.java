@@ -1,27 +1,25 @@
 package christmas.view;
 
 import christmas.constants.DecemberEvent;
+import christmas.constants.Message;
 
 import java.util.Map;
 
 public class OutputView {
 
-    static String ERROR_MESSAGE_DATE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
-    static String ERROR_MESSAGE_MENU = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
-
 
     public static void viewErrorMessageDate() {
-        System.out.println(ERROR_MESSAGE_DATE);
+        System.out.println(Message.ERROR_MESSAGE_DATE.getMessgae());
     }
 
     public static void viewErrorMessageMenu() {
-        System.out.println(ERROR_MESSAGE_MENU);
+        System.out.println(Message.ERROR_MESSAGE_MENU.getMessgae());
     }
 
     public static void viewOrderMenuHistory(int date, Map<String, Integer> orderMenu) {
         System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
         System.out.println();
-        System.out.println("<주문 메뉴>");
+        System.out.println(Message.ORDER_MENU_HISTORY.getMessgae());
 
         for (String menuName : orderMenu.keySet()) {
             System.out.println(menuName + " " + orderMenu.get(menuName) + "개");
@@ -30,13 +28,13 @@ public class OutputView {
 
     public static void viewTotalOrderAmountBeforeDiscount(int totalAmountBeforeDiscount) {
         System.out.println();
-        System.out.println("<할인 전 총주문 금액>");
+        System.out.println(Message.TOTAL_ORDER_AMOUNT.getMessgae());
         System.out.println(String.format("%,d원", totalAmountBeforeDiscount, 3));
     }
 
     public static void viewGiftHistory() {
         System.out.println();
-        System.out.println("<증정 메뉴>");
+        System.out.println(Message.GIFT_HISTORY.getMessgae());
     }
 
     public static void giveGift() {
@@ -45,12 +43,12 @@ public class OutputView {
     }
 
     public static void noEvnetHistory() {
-        System.out.println("없음");
+        System.out.println(Message.NOTHING.getMessgae());
     }
 
     public static void viewDiscountDetails() {
         System.out.println();
-        System.out.println("<혜택 내역>");
+        System.out.println(Message.EVENT_HISTORY.getMessgae());
     }
 
     public static void viewChristmasDiscount(int christmasDistcountAmount) {
@@ -71,7 +69,7 @@ public class OutputView {
 
     public static void viewTotalDiscountAmountTitle() {
         System.out.println();
-        System.out.println("<총혜택 금액>");
+        System.out.println(Message.TOTAL_BENEFITS_AMOUNT.getMessgae());
     }
 
     public static void viewTotalDiscountAmount(int totalDiscountAmount) {
@@ -82,7 +80,7 @@ public class OutputView {
 
     public static void viewPayAmount(int payAmount) {
         System.out.println();
-        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(Message.PAY_AMOUNT_AFTER_DISCOUNT.getMessgae());
         System.out.println(String.format("%,d원", payAmount, 3));
     }
 

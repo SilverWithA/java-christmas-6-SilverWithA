@@ -11,59 +11,59 @@ import java.util.Map;
 public class Order {
     Map<String, Integer> orderMenu;
     String SEPERATOR = "-";
-    String ERROR_UNVALIDATED_ORDER ="[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
 
     List<String> orderMenuName;
     List<Integer> orderMenuCount;
 
-    public void setOrderMenu(Map<String, Integer> orderMenu){
-        this.orderMenu = orderMenu;
-    }
 
-    public Map<String, Integer> getOrderMenu(){
+    public Map<String, Integer> getOrderMenu() {
         return this.orderMenu;
     }
-    public void validateOrder(String rawInputOrder){
-        initOrderMenus();
-        String[] splitedOrderMenu = splitByComma(rawInputOrder);
 
-        for(String order: splitedOrderMenu){
-            checkOrderFormat(order);
-        }
-
+    public void validateOrder(String rawInputOrder) {
+        initOrderMenu();
+        checkOrderFormat(rawInputOrder);
         OrderValidator.validateMenuName(orderMenuName);
         OrderValidator.validateMenuCount(orderMenuCount);
 
-        Map<String, Integer> OrderMap = makeOrderMap(splitedOrderMenu);
+        Map<String, Integer> OrderMap = arrangeOrderMap();
         this.orderMenu = OrderMap;
     }
-    public void initOrderMenus(){
+
+    public void initOrderMenu() {
         this.orderMenuName = new ArrayList<>();
         this.orderMenuCount = new ArrayList<>();
     }
 
+    public void checkOrderFormat(String rawInputOrder) {
+        String[] splitedOrderMenu = splitByComma(rawInputOrder);
 
-    public String[] splitByComma(String rawInputOrder){
-        String blankRemovedOrder = rawInputOrder.replace(" ","");
-        return blankRemovedOrder.split(",");
+        for (String order : splitedOrderMenu) {
+            String[] tempOrder = splitBySeperator(order);
+            isOrderconsistTwoParts(tempOrder);
+            isSecondElementInteger(tempOrder);
+            arrageOrderMenu(tempOrder);
+
+        }
     }
 
-    public void checkOrderFormat(String order) {
-        String[] tempOrder = splitBySeperator(order);
-        isOrderconsistTwoParts(tempOrder);
-        isSecondElementInteger(tempOrder);
-
+    public void arrageOrderMenu(String[] tempOrder) {
         orderMenuName.add(tempOrder[0]);
         int eachOrderMenuCount = Integer.parseInt(tempOrder[1]);
         orderMenuCount.add(eachOrderMenuCount);
     }
 
-    public String[] splitBySeperator(String order){
+    public String[] splitByComma(String rawInputOrder) {
+        String blankRemovedOrder = rawInputOrder.replace(" ", "");
+        return blankRemovedOrder.split(",");
+    }
+
+    public String[] splitBySeperator(String order) {
         isInSeperator(order);
         return order.split(SEPERATOR);
     }
 
-    public void isSecondElementInteger(String[] tempOrder){
+    public void isSecondElementInteger(String[] tempOrder) {
         try {
             Integer.parseInt(tempOrder[1]);
         } catch (NumberFormatException e) {
@@ -71,30 +71,28 @@ public class Order {
         }
     }
 
-    public void isInSeperator(String order){
-        if(! order.contains(SEPERATOR)){
-            throw new IllegalArgumentException(ERROR_UNVALIDATED_ORDER);
+    public void isInSeperator(String order) {
+        if (!order.contains(SEPERATOR)) {
+            throw new IllegalArgumentException();
         }
     }
 
-    public void isOrderconsistTwoParts(String[] tempOrder){
-        if(tempOrder.length != 2){
-            throw new IllegalArgumentException(ERROR_UNVALIDATED_ORDER);
+    public void isOrderconsistTwoParts(String[] tempOrder) {
+        if (tempOrder.length != 2) {
+            throw new IllegalArgumentException();
         }
     }
 
-    public  Map<String, Integer> makeOrderMap(String[] splitedOrderMenu){
+    public Map<String, Integer> arrangeOrderMap() {
         Map<String, Integer> OrderMap = new HashMap<>();
 
-        for(String order: splitedOrderMenu){
-            String[] tempOrder = splitBySeperator(order);
-            int tempCount = Integer.parseInt(tempOrder[1]);
-            OrderMap.put(tempOrder[0], tempCount);
+        for (int i = 0; i < orderMenuName.size(); i++) {
+            OrderMap.put(orderMenuName.get(i), orderMenuCount.get(i));
         }
         return OrderMap;
     }
 
-    public int totalAmountOrder(){
+    public int totalAmountOrder() {
         return Calculator.calculateTotalAmountBeforeDiscount(orderMenu);
     }
 
