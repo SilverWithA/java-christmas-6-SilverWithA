@@ -20,9 +20,11 @@ public class Order {
         return this.orderMenu;
     }
 
+    // 입력한 주문의 유효성 확인
     public void validateOrder(String rawInputOrder) {
         initOrderMenu();
         checkOrderFormat(rawInputOrder);
+
         OrderValidator.validateMenuName(orderMenuName);
         OrderValidator.validateMenuCount(orderMenuCount);
 

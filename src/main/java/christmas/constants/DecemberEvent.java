@@ -6,8 +6,7 @@ public enum DecemberEvent {
 
     CANT_ORDER_ONLY("음료",0,0),
     MAX_ORDER_COUNT(null,0,20),
-    GIFT_MENU_NAME("샴페인", 120000,0),
-    GIFT_MENU_COUNT("샴페인",1,0),
+    GIFT_MENU("샴페인", 120000,1),
     FIRST_EVENT_BADGE("산타", 20000,0),
     SECOND_EVENT_BADGE("트리", 10000,0),
     THIRD_EVENT_BADGE("별", 5000,0),

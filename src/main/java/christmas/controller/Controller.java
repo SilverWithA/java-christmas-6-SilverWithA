@@ -50,8 +50,6 @@ public class Controller {
         date.setVistitDate(vistitDate);
     }
 
-    // ---------------------------------------------
-
 
     public void askOrderMenu() {
         while (true) {
@@ -97,21 +95,19 @@ public class Controller {
         event.applyDiscountAbountAllEvent(discount, date, order);
 
         boolean eventBenefits = event.getEventBenefits();
-        if(!eventBenefits){
+        if (!eventBenefits) {
             OutputView.noEvnetHistory();
         }
-
     }
-
 
 
     public void showTotalDiscountAmount() {
         int totalDiscountAmount = discount.getTotalDiscountAmount();
         OutputView.viewTotalDiscountAmountTitle();
 
-        if(totalDiscountAmount > 0){
+        if (totalDiscountAmount > 0) {
             OutputView.viewTotalDiscountAmount(totalDiscountAmount);
-        }else if(totalDiscountAmount == 0){
+        } else if (totalDiscountAmount == 0) {
             OutputView.noEvnetHistory();
         }
     }

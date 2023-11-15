@@ -38,8 +38,8 @@ public class OutputView {
     }
 
     public static void giveGift() {
-        System.out.println(DecemberEvent.GIFT_MENU_NAME.getName() + " "
-                + DecemberEvent.GIFT_MENU_COUNT.getPrice() + "개");
+        System.out.println(DecemberEvent.GIFT_MENU.getName() + " "
+                + DecemberEvent.GIFT_MENU.getCount() + "개");
     }
 
     public static void noEvnetHistory() {
@@ -93,22 +93,17 @@ public class OutputView {
         System.out.println(Message.EVENT_BADGE.getMessgae());
     }
     public static void viewEventBadge(int totalDiscountAmount){
-        DecemberEvent firstEventBadge = DecemberEvent.FIRST_EVENT_BADGE;
-        DecemberEvent secondEventBadge = DecemberEvent.SECOND_EVENT_BADGE;
-        DecemberEvent thirdEventBadge = DecemberEvent.THIRD_EVENT_BADGE;
-        DecemberEvent noEventBadge = DecemberEvent.EVENT_BADGE_NOTHING;
+        if (totalDiscountAmount > DecemberEvent.FIRST_EVENT_BADGE.getPrice()) {
+            System.out.println(DecemberEvent.FIRST_EVENT_BADGE.getName());
 
-        if (totalDiscountAmount > firstEventBadge.getPrice()) {
-            System.out.println(firstEventBadge.getName());
+        } else if (totalDiscountAmount > DecemberEvent.SECOND_EVENT_BADGE.getPrice()) {
+            System.out.println(DecemberEvent.SECOND_EVENT_BADGE.getName());
 
-        } else if (totalDiscountAmount > secondEventBadge.getPrice()) {
-            System.out.println(secondEventBadge.getName());
+        } else if (totalDiscountAmount > DecemberEvent.THIRD_EVENT_BADGE.getPrice()) {
+            System.out.println(DecemberEvent.THIRD_EVENT_BADGE.getName());
 
-        } else if (totalDiscountAmount > thirdEventBadge.getPrice()) {
-            System.out.println(thirdEventBadge.getName());
-
-        } else if (totalDiscountAmount == noEventBadge.getPrice()) {
-            System.out.println(noEventBadge.getName());
+        } else if (totalDiscountAmount == DecemberEvent.EVENT_BADGE_NOTHING.getPrice()) {
+            System.out.println(DecemberEvent.EVENT_BADGE_NOTHING.getName());
         }
     }
 

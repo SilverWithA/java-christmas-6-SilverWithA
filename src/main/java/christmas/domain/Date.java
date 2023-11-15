@@ -19,25 +19,24 @@ public class Date {
         return this.vistitDate;
     }
 
-    public boolean getSpecialDayOrNot() {
-        return specialDayOrNot;
-    }
-
-    public static void isInRange(int vistitDate) {
-        if (vistitDate < EventMonth.DAY_START.getDay()
-                | vistitDate > EventMonth.DAY_END.getDay()) {
-            throw new IllegalArgumentException();
-        }
-    }
-
     public void setVistitDate(int vistitDate) {
         this.vistitDate = vistitDate;
         isWeekend(this.vistitDate);
         isSpecialDay(this.vistitDate);
     }
 
+    public boolean getSpecialDayOrNot() {
+        return specialDayOrNot;
+    }
     public boolean getWeekendOrNot() {
         return weekendOrNot;
+    }
+
+    public static void isInRange(int vistitDate) {
+        if (vistitDate < EventMonth.MONTH_START.getDay()
+                | vistitDate > EventMonth.MONTH_END.getDay()) {
+            throw new IllegalArgumentException();
+        }
     }
 
 
@@ -77,8 +76,7 @@ public class Date {
     }
 
     public int canChristmasDiscount() {
-        int christmasDistcountAmount = Calculator.calculateChristmasDistcount(vistitDate);
-        return christmasDistcountAmount;
+        return Calculator.calculateChristmasDistcount(vistitDate);
     }
 
     public int canSpecialDiscount() {

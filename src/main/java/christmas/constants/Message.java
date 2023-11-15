@@ -24,7 +24,7 @@ public enum Message {
 
 
      private final String messgae;
-    private Message(String messgae){
+    Message(String messgae){
         this.messgae = messgae;
     }
 
