@@ -1,25 +1,16 @@
 package christmas.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class DiscountTest {
 
-    @Test
-    void 할인_전_총주문금액_설정테스트(){
-        Discount discount = new Discount();
-        int expectedAmount = 110000;
-        discount.setTotalAmount(110000);
-
-        assertThat(discount.getTotalAmount()).isEqualTo(expectedAmount);
-
-    }
-
-
 
     @Test
-    void 크리스마스_할인금액_설정테스트(){
+    @DisplayName("계산된 크리스마스 할인액이 클래스 내 잘 설정되는지 확인하는 테스트")
+    void setChristmasDistcountAmountTest(){
         Discount discount = new Discount();
         Date date = new Date();
         date.setVistitDate(25);
@@ -29,7 +20,8 @@ public class DiscountTest {
     }
 
     @Test
-    void 주말_할인금액_설정테스트(){
+    @DisplayName("계산된 주말 할인액이 클래스 내 잘 설정되는지 확인하는 테스트")
+    void setWeekendDistcountAmountTest(){
         Discount discount = new Discount();
         discount.setWeekendDistcountAmount(2023);
 

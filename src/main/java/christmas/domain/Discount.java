@@ -63,8 +63,7 @@ public class Discount {
         }
     }
 
-
-    // 특별 할인 설정 Date date
+    // 특별 할인 설정
     public void setSpecialDistcountAmount(Date date) {
         int discountAmount = date.canSpecialDiscount();
         if (discountAmount > 0) {
