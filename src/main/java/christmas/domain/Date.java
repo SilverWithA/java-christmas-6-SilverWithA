@@ -1,16 +1,16 @@
 package christmas.domain;
 
+import christmas.constants.DecemberSpecialDays;
 import christmas.utils.Calculator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
 public class Date {
     int date;
-    int FIRST_DAY = 1;
-    int SECOND_DAY = 2;
     boolean weekend = false;
-    List<Integer> SPECIAL_DAYS = Arrays.asList(3, 10, 17, 24, 25, 31);
+    List<DecemberSpecialDays> specialDaysInformation = DecemberSpecialDays.getSpecialDays();
     boolean specialDay = false;
 
     public int getDate(){
@@ -45,9 +45,19 @@ public class Date {
     }
 
     public void isSpecialDay(int date) {
-        if (SPECIAL_DAYS.contains(date)) {
+        List<Integer> specialDays = arrangeSpecialDays();
+        if (specialDays.contains(date)) {
             this.specialDay = true;
         }
+    }
+
+    public  List<Integer> arrangeSpecialDays(){
+        List<Integer> arrangedSpecialDays = new ArrayList<>();
+
+        for(DecemberSpecialDays specialDayInformation : specialDaysInformation){
+            arrangedSpecialDays.add(specialDayInformation.getSpecialDay());
+        }
+        return arrangedSpecialDays;
     }
 
     public int canChristmasDiscount() {

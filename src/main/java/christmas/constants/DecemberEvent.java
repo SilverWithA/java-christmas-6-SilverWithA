@@ -1,5 +1,7 @@
 package christmas.constants;
 
+import org.mockito.internal.matchers.Null;
+
 public enum DecemberEvent {
     GIFT_MENU_NAME("샴페인", 120000),
     GIFT_MENU_COUNT("샴페인",1),
