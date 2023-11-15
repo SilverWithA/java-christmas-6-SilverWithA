@@ -8,7 +8,6 @@ import christmas.domain.Order;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
-import java.util.Map;
 
 public class Controller {
 
@@ -17,14 +16,17 @@ public class Controller {
     Discount discount = new Discount();
     Event event = new Event();
 
-    public void evenStart() {
+    public void DecemberEventStart() {
         askVistitDate();
         askOrderMenu();
         showOrderMenu();
+
         showTotalOrderAmountBeforeDiscount();
         showGiftMenu();
+
         showDiscountDetails();
         showTotalDiscountAmount();
+
         showPayAmount();
         showEventBadage();
     }
